@@ -5,20 +5,27 @@ import hr.mogh.trees.Node;
 import java.util.*;
 
 /**
- * Created by vlado on 9.10.2015..
+ * Solves the following problem: </p>
+ * Given a word and a list of legal words find all paths from the root word to the given word. One step in the path
+ * is a legal word that has exactly one letter added or changed from the step before it (a one-letter-different word).
+ * Created by vlado on 9.10.2015.
  */
 public class OffByOneLetterSolver {
 
     static Set<String> legalWords = new HashSet<String>(Arrays.asList("book", "look", "crook", "nook", "nuts",
             "buck", "boob", "loot", "hoot", "horn", "turn", "run", "prune", "boom", "loom", "hunt", "poop", "punt",
             "treat", "greet", "null", "point", "runt", "lint", "burn", "lick", "luck", "lunch", "boon", "broom",
-            "pole", "noon", "boot", "boat", "brook", "bunk", "trunk", "room", "broom", "tomb", "gloom", "foot",
-            "font", "cool", "fool", "boil"));
+            "pole", "noon", "boot", "boat", "brook", "bunk", "trunk", "room", "tomb", "gloom", "foot", "font",
+            "cool", "fool", "boil", "rune", "pool", "burn", "barn", "born", "bank", "pink", "coil", "moat", "most",
+            "mist", "must", "dust", "tool", "wool", "will", "till", "want", "foil", "toil", "toll", "told", "mold"));
     static List<Character> alphabet = new ArrayList<>(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'x', 'w', 'y', 'z'));
 
-    public static Node generateOffByOneLetterTree() {
-        String rootName = "bool";
+    public static Node generateOffByOneLetterTree(String rootWord) throws IllegalArgumentException {
+        if (rootWord == null || rootWord.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        String rootName = rootWord;
         Set<String> usedWords = new HashSet<>();
         usedWords.add(rootName);
         Node root = new Node();
@@ -33,42 +40,32 @@ public class OffByOneLetterSolver {
      *
      * @param root Tree root
      * @param word Final word.
-     * @return The list of strings representing the path from <code>startWord</code> to <code>finishWord</code>.
+     * @return List of lists of strings representing the path from <code>startWord</code> to <code>finishWord</code>.
      * <code>null</code> if no such path exists.
      */
-    public static List<String> findPathFromWordToWord(Node root, String word) throws IllegalArgumentException {
+    public static List<List<String>> findPathFromWordToWord(Node root, String word) throws IllegalArgumentException {
         // do a BFS to find the child
-        List<String> pathToWord = new ArrayList<>();
+        List<List<String>> allPaths = new ArrayList<>(); // list of lists - very Python, much lists, wow
+        List<String> pathToWord = null;
 
         if (word == null || word.length() == 0) {
             throw new IllegalArgumentException();
         }
 
-        boolean pathFound = false;
         List<Node> searchList = new ArrayList<>();
         searchList.add(root);
-        Node targetNode = null;
         while (searchList.size() > 0) {
             Node node = searchList.get(0);
             if (node.getPayload().equals(word)) {
-                targetNode = node;
-                pathFound = true;
-                break;
+                // node found, generate the path to it
+                pathToWord = getWordPathForNode(node);
+                allPaths.add(pathToWord);
             } else {
                 searchList.addAll(node.getChildren());
             }
             searchList.remove(0);
         }
-
-        if (targetNode != null) {
-            while (targetNode != null) {
-                pathToWord.add(targetNode.getPayload().toString());
-                targetNode = targetNode.getParent();
-            }
-            Collections.reverse(pathToWord);
-        }
-
-        return pathFound ? pathToWord : null;
+        return allPaths.size() > 0 ? allPaths : null;
     }
 
     private static List<Node> generateOneLetterDifferentNodes(String word, Set<String> usedWords) {
@@ -82,8 +79,8 @@ public class OffByOneLetterSolver {
                     continue;
                 }
 
-                String genWordReplace = "";
-                String genWordAddInFront = "";
+                String genWordReplace;
+                String genWordAddInFront;
 
                 String wordPrefix = "";
                 if (i > 0) {
@@ -116,10 +113,30 @@ public class OffByOneLetterSolver {
         for (String generatedWord : generatedWords) {
             Node node = new Node();
             node.setPayload(generatedWord);
-            node.setChildren(generateOneLetterDifferentNodes(generatedWord, usedWords));
+            Set<String> usedWordsForThisBranch = new HashSet<>(usedWords);
+            usedWordsForThisBranch.add(generatedWord);
+            node.setChildren(generateOneLetterDifferentNodes(generatedWord, usedWordsForThisBranch));
             generatedNodes.add(node);
         }
 
         return generatedNodes;
+    }
+
+    /**
+     * Returns a path of words that lead from the root to the given node.
+     *
+     * @param node The last node in the path.
+     * @return A list of words from the tree root to the given node.
+     */
+    private static List<String> getWordPathForNode(Node node) {
+        List<String> pathToWord = new ArrayList<>();
+        if (node != null) {
+            while (node != null) {
+                pathToWord.add(node.getPayload().toString());
+                node = node.getParent();
+            }
+            Collections.reverse(pathToWord);
+        }
+        return pathToWord;
     }
 }
