@@ -24,7 +24,7 @@ public class TreeTests {
         String rootWord = "bool";
         String targetWord = "gloom";
         Node root = OffByOneLetterSolver.generateOffByOneLetterTree(rootWord);
-        List<List<String>> paths = OffByOneLetterSolver.findPathFromWordToWord(root, targetWord);
+        List<List<String>> paths = OffByOneLetterSolver.findPathFromRootToWord(root, targetWord);
         Assert.assertNotNull(paths);
         Assert.assertTrue(paths.size() > 0);
         for (List<String> path : paths) {
@@ -36,7 +36,7 @@ public class TreeTests {
     @Test
     public void findOffByOneLetterWordPathToFakeWord_shouldFail() {
         Node root = OffByOneLetterSolver.generateOffByOneLetterTree("bool");
-        List<List<String>> paths = OffByOneLetterSolver.findPathFromWordToWord(root, "token");
+        List<List<String>> paths = OffByOneLetterSolver.findPathFromRootToWord(root, "token");
         Assert.assertNull(paths);
     }
 
@@ -49,7 +49,7 @@ public class TreeTests {
         String rootWord = "boon";
         String targetWord = "coil";
         Node root = OffByOneLetterSolver.generateOffByOneLetterTree(rootWord);
-        List<List<String>> paths = OffByOneLetterSolver.findPathFromWordToWord(root, targetWord);
+        List<List<String>> paths = OffByOneLetterSolver.findPathFromRootToWord(root, targetWord);
         Assert.assertNotNull(paths);
         Assert.assertTrue(paths.size() > 1);
         Set<String> concatenatedPathSet = new HashSet<>();

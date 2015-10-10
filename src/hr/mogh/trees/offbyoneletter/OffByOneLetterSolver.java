@@ -36,14 +36,14 @@ public class OffByOneLetterSolver {
     }
 
     /**
-     * Uses BFS to find a path from one word to another by using one-letter differences.
+     * Uses BFS to find a path from the root word to another by using one-letter differences.
      *
      * @param root Tree root
      * @param word Final word.
      * @return List of lists of strings representing the path from <code>startWord</code> to <code>finishWord</code>.
      * <code>null</code> if no such path exists.
      */
-    public static List<List<String>> findPathFromWordToWord(Node root, String word) throws IllegalArgumentException {
+    public static List<List<String>> findPathFromRootToWord(Node root, String word) throws IllegalArgumentException {
         // do a BFS to find the child
         List<List<String>> allPaths = new ArrayList<>(); // list of lists - very Python, much lists, wow
         List<String> pathToWord = null;
@@ -66,6 +66,39 @@ public class OffByOneLetterSolver {
             searchList.remove(0);
         }
         return allPaths.size() > 0 ? allPaths : null;
+    }
+
+    /**
+     * Finds all word paths from one word to another. Each step in a path is a legal word that is one letter off from the word in the step before.
+     * @param treeRoot Root of the word tree.
+     * @param startWord Starting word in the path.
+     * @param targetWord Final word in the path.
+     * @return List of paths (lists of strings) or <code>null</code> if no paths exist.
+     * @throws IllegalArgumentException
+     */
+    public static List<List<String>> findPathFromWordToWord(Node treeRoot, String startWord, String targetWord) throws
+            IllegalArgumentException {
+        if (startWord == null || startWord.length() == 0) {
+            throw new IllegalArgumentException("Start word must not be null or empty");
+        }
+        if (targetWord == null || targetWord.length() == 0) {
+            throw new IllegalArgumentException("Target word must not be null or empty");
+        }
+
+        List<List<String>> foundPaths = new ArrayList<>();
+        List<Node> searchList = new ArrayList<>();
+        searchList.add(treeRoot);
+        while (searchList.size() > 0) {
+            Node node = searchList.get(0);
+            if (node.getPayload().equals(startWord)) {
+                List<List<String>> paths = findPathFromRootToWord(node, targetWord);
+                foundPaths.addAll(paths);
+            } else {
+                searchList.addAll(node.getChildren());
+            }
+            searchList.remove(0);
+        }
+        return foundPaths.size() > 0 ? foundPaths : null;
     }
 
     private static List<Node> generateOneLetterDifferentNodes(String word, Set<String> usedWords) {
