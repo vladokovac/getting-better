@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vlado on 9.10.2015..
+ * A basic tree node. Contains <code>Object</code> payload, parent pointer and list of children.
  */
 public class Node {
     Object payload;
     Node parent;
     List<Node> children;
-
 
     public Node() {
         payload = null;
