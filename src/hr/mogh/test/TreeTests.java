@@ -52,12 +52,24 @@ public class TreeTests {
         List<List<String>> paths = OffByOneLetterSolver.findPathFromRootToWord(root, targetWord);
         Assert.assertNotNull(paths);
         Assert.assertTrue(paths.size() > 1);
-        Set<String> concatenatedPathSet = new HashSet<>();
+        checkIfPathsAreValid(rootWord, targetWord, paths);
+    }
 
+    @Test
+    public void findWordPathBetweenAnyTwoWords_shouldSucceed() {
+        String startWord = "room";
+        String targetWord = "coil";
+        List<List<String>> paths = OffByOneLetterSolver.findPathFromWordToWord(startWord, targetWord);
+        Assert.assertNotNull(paths);
+        checkIfPathsAreValid(startWord, targetWord, paths);
+    }
+
+    private void checkIfPathsAreValid(String startWord, String targetWord, List<List<String>> paths) {
         // check if all paths are valid
+        Set<String> concatenatedPathSet = new HashSet<>();
         for (List<String> path : paths) {
             StringBuilder stringBuilder = new StringBuilder();
-            Assert.assertEquals(path.get(0), rootWord);
+            Assert.assertEquals(path.get(0), startWord);
             Assert.assertEquals(path.get(path.size() - 1), targetWord);
             // check for circular references
             Set<String> usedWords = new HashSet<>();

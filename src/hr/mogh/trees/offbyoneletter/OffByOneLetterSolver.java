@@ -12,12 +12,13 @@ import java.util.*;
  */
 public class OffByOneLetterSolver {
 
-    static Set<String> legalWords = new HashSet<String>(Arrays.asList("book", "look", "crook", "nook", "nuts",
-            "buck", "boob", "loot", "hoot", "horn", "turn", "run", "prune", "boom", "loom", "hunt", "poop", "punt",
-            "treat", "greet", "null", "point", "runt", "lint", "burn", "lick", "luck", "lunch", "boon", "broom",
-            "pole", "noon", "boot", "boat", "brook", "bunk", "trunk", "room", "tomb", "gloom", "foot", "font",
-            "cool", "fool", "boil", "rune", "pool", "burn", "barn", "born", "bank", "pink", "coil", "moat", "most",
-            "mist", "must", "dust", "tool", "wool", "will", "till", "want", "foil", "toil", "toll", "told", "mold"));
+    static Set<String> legalWords = new HashSet<>(Arrays.asList("book", "look", "crook", "nook", "nuts", "buck",
+            "loot", "hoot", "horn", "turn", "run", "prune", "boom", "loom", "hunt", "poop", "punt", "treat", "greet",
+            "null", "point", "runt", "lint", "burn", "lick", "luck", "lunch", "boon", "broom", "pole", "noon",
+            "boot", "boat", "brook", "bunk", "trunk", "room", "tomb", "gloom", "foot", "font", "cool", "fool",
+            "boil", "rune", "pool", "burn", "barn", "born", "bank", "pink", "coil", "moat", "most", "mist", "must",
+            "dust", "tool", "wool", "will", "till", "want", "foil", "toil", "toll", "told", "mold", "teal", "tell",
+            "real", "rear", "gear", "fear", "pear", "fears"));
     static List<Character> alphabet = new ArrayList<>(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'x', 'w', 'y', 'z'));
 
@@ -25,11 +26,11 @@ public class OffByOneLetterSolver {
         if (rootWord == null || rootWord.length() == 0) {
             throw new IllegalArgumentException();
         }
-        String rootName = rootWord;
+
         Set<String> usedWords = new HashSet<>();
-        usedWords.add(rootName);
+        usedWords.add(rootWord);
         Node root = new Node();
-        root.setPayload(rootName);
+        root.setPayload(rootWord);
         root.setParent(null);
         root.setChildren(generateOneLetterDifferentNodes(root.getPayload().toString(), usedWords));
         return root;
@@ -46,7 +47,7 @@ public class OffByOneLetterSolver {
     public static List<List<String>> findPathFromRootToWord(Node root, String word) throws IllegalArgumentException {
         // do a BFS to find the child
         List<List<String>> allPaths = new ArrayList<>(); // list of lists - very Python, much lists, wow
-        List<String> pathToWord = null;
+        List<String> pathToWord;
 
         if (word == null || word.length() == 0) {
             throw new IllegalArgumentException();
@@ -69,15 +70,16 @@ public class OffByOneLetterSolver {
     }
 
     /**
-     * Finds all word paths from one word to another. Each step in a path is a legal word that is one letter off from the word in the step before.
-     * @param treeRoot Root of the word tree.
-     * @param startWord Starting word in the path.
+     * Finds all word paths from one word to another. Each step in a path is a legal word that is one letter off from
+     * the word in the step before.
+     *
+     * @param startWord  Starting word in the path.
      * @param targetWord Final word in the path.
      * @return List of paths (lists of strings) or <code>null</code> if no paths exist.
      * @throws IllegalArgumentException
      */
-    public static List<List<String>> findPathFromWordToWord(Node treeRoot, String startWord, String targetWord) throws
-            IllegalArgumentException {
+    public static List<List<String>> findPathFromWordToWord(String startWord, String targetWord)
+            throws IllegalArgumentException {
         if (startWord == null || startWord.length() == 0) {
             throw new IllegalArgumentException("Start word must not be null or empty");
         }
@@ -85,20 +87,8 @@ public class OffByOneLetterSolver {
             throw new IllegalArgumentException("Target word must not be null or empty");
         }
 
-        List<List<String>> foundPaths = new ArrayList<>();
-        List<Node> searchList = new ArrayList<>();
-        searchList.add(treeRoot);
-        while (searchList.size() > 0) {
-            Node node = searchList.get(0);
-            if (node.getPayload().equals(startWord)) {
-                List<List<String>> paths = findPathFromRootToWord(node, targetWord);
-                foundPaths.addAll(paths);
-            } else {
-                searchList.addAll(node.getChildren());
-            }
-            searchList.remove(0);
-        }
-        return foundPaths.size() > 0 ? foundPaths : null;
+        Node root = generateOffByOneLetterTree(startWord);
+        return findPathFromRootToWord(root, targetWord);
     }
 
     private static List<Node> generateOneLetterDifferentNodes(String word, Set<String> usedWords) {
