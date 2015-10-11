@@ -91,6 +91,12 @@ public class OffByOneLetterSolver {
         return findPathFromRootToWord(root, targetWord);
     }
 
+    /**
+     * Creates all off-by-one-letter children for a given word. All generated children are legal words.
+     * @param word Word from which children are generated.
+     * @param usedWords A list of words already visited in this branch.
+     * @return List of nodes or null if no such nodes exist.
+     */
     private static List<Node> generateOneLetterDifferentNodes(String word, Set<String> usedWords) {
         List<String> generatedWords = new ArrayList<>();
         List<Node> generatedNodes = new ArrayList<>();
