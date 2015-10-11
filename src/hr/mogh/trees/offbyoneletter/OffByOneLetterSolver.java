@@ -37,8 +37,9 @@ public class OffByOneLetterSolver {
     }
 
     /**
-     * Uses BFS to find a path from the root word to another by using one-letter differences.
-     *
+     * Uses BFS to find <b>all</b> paths from the root word to the given word by using one letter differences.<br/>
+     *  Space complexity: <code>O(n)</code><br/>
+     *  Time complexity: <code>O(n)</code>
      * @param root Tree root
      * @param word Final word.
      * @return List of lists of strings representing the path from <code>startWord</code> to <code>finishWord</code>.
@@ -71,8 +72,9 @@ public class OffByOneLetterSolver {
 
     /**
      * Finds all word paths from one word to another. Each step in a path is a legal word that is one letter off from
-     * the word in the step before.
-     *
+     * the word in the step before.<br/>
+     *  Space complexity: <code>O(n)</code><br/>
+     *  Time complexity: <code>O(n)</code>
      * @param startWord  Starting word in the path.
      * @param targetWord Final word in the path.
      * @return List of paths (lists of strings) or <code>null</code> if no paths exist.
@@ -92,7 +94,9 @@ public class OffByOneLetterSolver {
     }
 
     /**
-     * Creates all off-by-one-letter children for a given word. All generated children are legal words.
+     * Creates all off-by-one-letter children for a given word. All generated children are legal words.<br/>
+     *  Space complexity: <code>O(n)</code><br/>
+     *  Time complexity: <code>O(n)</code>
      * @param word Word from which children are generated.
      * @param usedWords A list of words already visited in this branch.
      * @return List of nodes or null if no such nodes exist.
