@@ -2,7 +2,6 @@ package hr.mogh.trees.binary;
 
 import hr.mogh.trees.BinaryTreeNode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +24,7 @@ public class BinaryTreeSolver {
         return root;
     }
 
-    private static void insert(BinaryTreeNode node, Comparable data) throws NullPointerException, ClassCastException{
+    public static void insert(BinaryTreeNode node, Comparable data) throws NullPointerException, ClassCastException {
         if (data == null) {
             throw new IllegalArgumentException();
         }
@@ -47,6 +46,39 @@ public class BinaryTreeSolver {
         }
     }
 
+    public static void delete(BinaryTreeNode node, Comparable data) throws NullPointerException, ClassCastException,
+            IllegalArgumentException {
+        if (node == null || data == null) {
+            throw new IllegalArgumentException();
+        }
+
+        BinaryTreeNode deletedNode = find(node, data);
+        if (deletedNode != null) {
+            BinaryTreeNode parent = deletedNode.getParent();
+            if (parent != null) {
+                if (deletedNode.getLeftChild() == null && deletedNode.getRightChild() == null) {
+                    if (parent.getRightChild() == deletedNode) {
+                        parent.setRightChild(null);
+                    } else {
+                        parent.setLeftChild(null);
+                    }
+                }
+
+                if (deletedNode.getLeftChild() == null && deletedNode.getRightChild() != null) {
+                    if (parent.getRightChild() == node) {
+                        parent.setRightChild(node.getRightChild());
+                    } else {
+                        parent.setLeftChild(node.getRightChild());
+                    }
+                } else if (deletedNode.getLeftChild() != null && deletedNode.getRightChild() != null) {
+                    BinaryTreeNode successorNode = findMin(deletedNode.getLeftChild());
+                    parent.setValue(successorNode.getValue());
+                    successorNode.getParent().setLeftChild(null);
+                }
+            }
+        }
+    }
+
     public static BinaryTreeNode find(BinaryTreeNode node, Comparable data) {
         if (node == null) {
             return null;
@@ -63,6 +95,20 @@ public class BinaryTreeSolver {
         }
 
         return foundNode;
+    }
+
+    public static BinaryTreeNode findMin(BinaryTreeNode node) throws IllegalArgumentException {
+        if (node == null) {
+            throw new IllegalArgumentException();
+        }
+        return node.getLeftChild() != null ? findMin(node.getLeftChild()) : node;
+    }
+
+    public static BinaryTreeNode findMax(BinaryTreeNode node) throws IllegalArgumentException {
+        if (node == null) {
+            throw new IllegalArgumentException();
+        }
+        return node.getRightChild() != null ? findMax(node.getRightChild()) : node;
     }
 
 
