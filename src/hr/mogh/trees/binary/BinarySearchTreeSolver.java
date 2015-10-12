@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class BinarySearchTreeSolver {
 
-    public static BinaryTreeNode generateBinaryTree (List<Integer> treeData) throws IllegalArgumentException {
+    public static BinaryTreeNode generateBinaryTree(List<Integer> treeData) throws IllegalArgumentException {
         if (treeData == null || treeData.size() == 0) {
             throw new IllegalArgumentException();
         }
@@ -24,7 +24,7 @@ public class BinarySearchTreeSolver {
         return root;
     }
 
-    public static void insert(BinaryTreeNode node,int data) throws NullPointerException, ClassCastException {
+    public static void insert(BinaryTreeNode node, int data) throws NullPointerException, ClassCastException {
         if (node == null) {
             throw new IllegalArgumentException();
         }
@@ -65,10 +65,16 @@ public class BinarySearchTreeSolver {
                 }
 
                 if (deletedNode.getLeftChild() == null && deletedNode.getRightChild() != null) {
-                    if (parent.getRightChild() == node) {
-                        parent.setRightChild(node.getRightChild());
+                    if (parent.getRightChild() == deletedNode) {
+                        parent.setRightChild(deletedNode.getRightChild());
                     } else {
-                        parent.setLeftChild(node.getRightChild());
+                        parent.setLeftChild(deletedNode.getRightChild());
+                    }
+                } else if (deletedNode.getLeftChild() != null && deletedNode.getRightChild() == null) {
+                    if (parent.getRightChild() == deletedNode) {
+                        parent.setRightChild(deletedNode.getLeftChild());
+                    } else {
+                        parent.setLeftChild(deletedNode.getLeftChild());
                     }
                 } else if (deletedNode.getLeftChild() != null && deletedNode.getRightChild() != null) {
                     BinaryTreeNode successorNode = findMin(deletedNode.getLeftChild());
@@ -87,7 +93,7 @@ public class BinarySearchTreeSolver {
         BinaryTreeNode foundNode;
         if (node.getValue() == data) {
             foundNode = node;
-        } else if (node.getValue() < data) {
+        } else if (node.getValue() > data) {
             foundNode = find(node.getLeftChild(), data);
         } else {
             foundNode = find(node.getRightChild(), data);
