@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Contains tests written to ensure correct generation and pathfinding of the Off-By-One-Letter Word Tree.
  */
-public class TreeTests {
+public class OffByOneLetterTreeTests {
 
     @Test
     public void treeGenerationTest() {

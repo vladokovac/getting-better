@@ -8,7 +8,7 @@ import java.util.List;
  * Contains basic tree algorithms: BFS, DFS, In-Order, Pre-Order, and Post-Order traversals.
  * Created by vlado on 11.10.2015.
  */
-public class BinaryTreeSolver {
+public class BinarySearchTreeSolver {
 
     public static BinaryTreeNode generateBinaryTree(List<Comparable> treeData) throws IllegalArgumentException {
         if (treeData == null || treeData.size() == 0) {
