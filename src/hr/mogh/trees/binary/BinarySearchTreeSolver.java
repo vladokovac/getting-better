@@ -10,26 +10,26 @@ import java.util.List;
  */
 public class BinarySearchTreeSolver {
 
-    public static BinaryTreeNode generateBinaryTree(List<Comparable> treeData) throws IllegalArgumentException {
+    public static BinaryTreeNode generateBinaryTree (List<Integer> treeData) throws IllegalArgumentException {
         if (treeData == null || treeData.size() == 0) {
             throw new IllegalArgumentException();
         }
 
         BinaryTreeNode root = new BinaryTreeNode(treeData.get(0), null);
-        List<Comparable> childrenData = treeData.subList(1, treeData.size());
-        for (Comparable data : childrenData) {
+        List<Integer> childrenData = treeData.subList(1, treeData.size());
+        for (Integer data : childrenData) {
             insert(root, data);
         }
 
         return root;
     }
 
-    public static void insert(BinaryTreeNode node, Comparable data) throws NullPointerException, ClassCastException {
-        if (data == null) {
+    public static void insert(BinaryTreeNode node,int data) throws NullPointerException, ClassCastException {
+        if (node == null) {
             throw new IllegalArgumentException();
         }
 
-        if (node.getValue().compareTo(data) < 0) {
+        if (node.getValue() >= data) {
             if (node.getLeftChild() == null) {
                 BinaryTreeNode child = new BinaryTreeNode(data, node);
                 node.setLeftChild(child);
@@ -46,9 +46,9 @@ public class BinarySearchTreeSolver {
         }
     }
 
-    public static void delete(BinaryTreeNode node, Comparable data) throws NullPointerException, ClassCastException,
+    public static void delete(BinaryTreeNode node, int data) throws NullPointerException, ClassCastException,
             IllegalArgumentException {
-        if (node == null || data == null) {
+        if (node == null) {
             throw new IllegalArgumentException();
         }
 
@@ -79,16 +79,15 @@ public class BinarySearchTreeSolver {
         }
     }
 
-    public static BinaryTreeNode find(BinaryTreeNode node, Comparable data) {
+    public static BinaryTreeNode find(BinaryTreeNode node, int data) {
         if (node == null) {
             return null;
         }
 
-        BinaryTreeNode foundNode = null;
-        int comparisonResult = node.getValue().compareTo(data);
-        if (comparisonResult == 0) {
+        BinaryTreeNode foundNode;
+        if (node.getValue() == data) {
             foundNode = node;
-        } else if (comparisonResult < 0) {
+        } else if (node.getValue() < data) {
             foundNode = find(node.getLeftChild(), data);
         } else {
             foundNode = find(node.getRightChild(), data);

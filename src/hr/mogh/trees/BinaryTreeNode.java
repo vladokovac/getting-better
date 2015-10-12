@@ -5,7 +5,7 @@ package hr.mogh.trees;
  * Created by vlado on 11.10.2015.
  */
 public class BinaryTreeNode {
-    private Comparable value;
+    private int value;
     private BinaryTreeNode parent;
     private BinaryTreeNode leftChild;
     private BinaryTreeNode rightChild;
@@ -13,16 +13,16 @@ public class BinaryTreeNode {
     public BinaryTreeNode() {
     }
 
-    public BinaryTreeNode(Comparable value, BinaryTreeNode parent) {
+    public BinaryTreeNode(int value, BinaryTreeNode parent) {
         this.value = value;
         this.parent = parent;
     }
 
-    public Comparable getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(Comparable value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
