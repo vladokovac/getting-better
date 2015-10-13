@@ -1,6 +1,6 @@
-package hr.mogh.trees.binary;
+package hr.mogh.datastructures.trees.binary;
 
-import hr.mogh.trees.BinaryTreeNode;
+import hr.mogh.datastructures.trees.BinaryTreeNode;
 
 import java.util.List;
 

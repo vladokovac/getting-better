@@ -1,7 +1,7 @@
 package hr.mogh.test;
 
-import hr.mogh.trees.BinaryTreeNode;
-import hr.mogh.trees.binary.BinarySearchTreeSolver;
+import hr.mogh.datastructures.trees.BinaryTreeNode;
+import hr.mogh.datastructures.trees.binary.BinarySearchTreeSolver;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

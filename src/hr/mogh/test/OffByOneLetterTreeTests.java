@@ -1,7 +1,7 @@
 package hr.mogh.test;
 
-import hr.mogh.trees.Node;
-import hr.mogh.trees.offbyoneletter.OffByOneLetterSolver;
+import hr.mogh.datastructures.trees.Node;
+import hr.mogh.problems.offbyoneletter.OffByOneLetterSolver;
 import org.junit.Assert;
 import org.junit.Test;
 

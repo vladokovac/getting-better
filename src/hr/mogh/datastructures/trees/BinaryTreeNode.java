@@ -1,4 +1,4 @@
-package hr.mogh.trees;
+package hr.mogh.datastructures.trees;
 
 /**
  * A binary tree node. Also has a reference to its parent.

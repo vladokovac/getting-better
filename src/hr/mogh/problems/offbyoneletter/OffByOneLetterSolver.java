@@ -1,6 +1,6 @@
-package hr.mogh.trees.offbyoneletter;
+package hr.mogh.problems.offbyoneletter;
 
-import hr.mogh.trees.Node;
+import hr.mogh.datastructures.trees.Node;
 
 import java.util.*;
 

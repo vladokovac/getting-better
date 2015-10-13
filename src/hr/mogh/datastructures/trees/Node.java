@@ -1,4 +1,4 @@
-package hr.mogh.trees;
+package hr.mogh.datastructures.trees;
 
 import java.util.ArrayList;
 import java.util.List;
