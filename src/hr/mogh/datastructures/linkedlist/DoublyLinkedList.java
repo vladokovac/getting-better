@@ -9,11 +9,16 @@ import java.util.List;
 public class DoublyLinkedList {
     private ListNode firstNode;
     private ListNode lastNode;
+    private int size;
 
     public DoublyLinkedList(List<Object> listData) {
         for (Object data : listData) {
             this.add(data);
         }
+    }
+
+    public int getSize() {
+        return size;
     }
 
     public void add(Object data) {
@@ -26,6 +31,7 @@ public class DoublyLinkedList {
             node.setNodeBefore(lastNode);
             lastNode = node;
         }
+        this.size++;
     }
 
     public ListNode find(Object data) {
@@ -42,13 +48,13 @@ public class DoublyLinkedList {
         return result;
     }
 
-    public void insertAfter(Object nodeData, Object newData) {
-        ListNode nodeBefore = this.find(nodeData);
+    public void insertAfter(ListNode nodeBefore, Object newData) {
         if (nodeBefore != null) {
             ListNode newNode = new ListNode(newData);
             newNode.setNodeBefore(nodeBefore);
             newNode.setNodeAfter(nodeBefore.getNodeAfter());
             nodeBefore.setNodeAfter(newNode);
+            this.size++;
         } else {
             this.add(newData);
         }
@@ -61,6 +67,7 @@ public class DoublyLinkedList {
             newNode.setNodeAfter(nodeAfter);
             newNode.setNodeBefore(nodeAfter.getNodeBefore());
             nodeAfter.setNodeBefore(newNode);
+            this.size++;
         } else {
             this.add(newData);
         }
@@ -70,6 +77,19 @@ public class DoublyLinkedList {
         ListNode node = this.find(data);
         if (node != null) {
             node.getNodeBefore().setNodeAfter(node.getNodeAfter());
+            this.size--;
         }
+    }
+
+    @Override
+    public String toString() {
+        ListNode node = this.firstNode;
+        StringBuilder stringBuilder = new StringBuilder();
+        while (node != null) {
+            stringBuilder.append(node.getValue().toString()).append(" <-> ");
+            node = node.getNodeAfter();
+        }
+        String output = stringBuilder.toString();
+        return output.substring(0, output.length() - 5);
     }
 }

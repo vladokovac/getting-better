@@ -28,7 +28,7 @@ public class BinarySearchTreeTests {
     }
 
     @After
-    public void cleanup() {
+    public void tearDown() {
         root = null;
     }
 
