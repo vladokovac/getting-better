@@ -1,4 +1,4 @@
-package hr.mogh.test;
+package hr.mogh.tests;
 
 import hr.mogh.datastructures.trees.Node;
 import hr.mogh.problems.offbyoneletter.OffByOneLetterSolver;

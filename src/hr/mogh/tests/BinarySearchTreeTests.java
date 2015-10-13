@@ -1,4 +1,4 @@
-package hr.mogh.test;
+package hr.mogh.tests;
 
 import hr.mogh.datastructures.trees.BinaryTreeNode;
 import hr.mogh.datastructures.trees.binary.BinarySearchTreeSolver;
