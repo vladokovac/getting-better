@@ -60,8 +60,7 @@ public class DoublyLinkedList {
         }
     }
 
-    public void insertBefore(Object nodeData, Object newData) {
-        ListNode nodeAfter = this.find(nodeData);
+    public void insertBefore(ListNode nodeAfter, Object newData) {
         if (nodeAfter != null) {
             ListNode newNode = new ListNode(newData);
             newNode.setNodeAfter(nodeAfter);

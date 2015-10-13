@@ -74,7 +74,7 @@ public class LinkedListTests {
         ListNode node = list.find("nuts");
         ListNode oldNodeBefore = node.getNodeBefore();
         ListNode oldNodeAfter = node.getNodeAfter();
-        list.insertBefore(node.getValue(), "brownfox");
+        list.insertBefore(node, "brownfox");
         ListNode insertedNode = list.find("brownfox");
         Assert.assertNotNull(insertedNode);
         Assert.assertEquals(node.getNodeBefore(), insertedNode);
