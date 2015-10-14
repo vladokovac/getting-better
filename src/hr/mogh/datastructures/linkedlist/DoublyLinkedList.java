@@ -48,24 +48,28 @@ public class DoublyLinkedList {
         return result;
     }
 
-    public void insertAfter(ListNode nodeBefore, Object newData) {
-        if (nodeBefore != null) {
+    public void insertAfter(ListNode node, Object newData) {
+        if (node != null) {
             ListNode newNode = new ListNode(newData);
-            newNode.setNodeBefore(nodeBefore);
-            newNode.setNodeAfter(nodeBefore.getNodeAfter());
-            nodeBefore.setNodeAfter(newNode);
+            newNode.setNodeBefore(node);
+            newNode.setNodeAfter(node.getNodeAfter());
+            ListNode nodeAfter = node.getNodeAfter();
+            nodeAfter.setNodeBefore(newNode);
+            node.setNodeAfter(newNode);
             this.size++;
         } else {
             this.add(newData);
         }
     }
 
-    public void insertBefore(ListNode nodeAfter, Object newData) {
-        if (nodeAfter != null) {
+    public void insertBefore(ListNode node, Object newData) {
+        if (node != null) {
             ListNode newNode = new ListNode(newData);
-            newNode.setNodeAfter(nodeAfter);
-            newNode.setNodeBefore(nodeAfter.getNodeBefore());
-            nodeAfter.setNodeBefore(newNode);
+            newNode.setNodeAfter(node);
+            newNode.setNodeBefore(node.getNodeBefore());
+            ListNode nodeBefore = node.getNodeBefore();
+            nodeBefore.setNodeAfter(newNode);
+            node.setNodeBefore(newNode);
             this.size++;
         } else {
             this.add(newData);

@@ -50,13 +50,13 @@ public class LinkedListTests {
     }
 
     @Test
-    public void findNodeTest_shouldFail(){
+    public void findNodeTest_shouldFail() {
         ListNode node = list.find("nutz");
         Assert.assertNull(node);
     }
 
     @Test
-    public void insertNodeAfterTest(){
+    public void insertNodeAfterTest() {
         ListNode node = list.find("nuts");
         ListNode oldNodeBefore = node.getNodeBefore();
         ListNode oldNodeAfter = node.getNodeAfter();
@@ -70,7 +70,7 @@ public class LinkedListTests {
     }
 
     @Test
-    public void insertNodeBeforeTest(){
+    public void insertNodeBeforeTest() {
         ListNode node = list.find("nuts");
         ListNode oldNodeBefore = node.getNodeBefore();
         ListNode oldNodeAfter = node.getNodeAfter();
