@@ -82,4 +82,40 @@ public class BinarySearchTreeTests {
         BinaryTreeNode node = BinarySearchTreeSolver.find(this.root, 42);
         Assert.assertNull(node);
     }
+
+    @Test
+    public void preOrderTraversalTest() {
+        List<Integer> preorderList = BinarySearchTreeSolver.getValuesPreOrder(this.root);
+        Assert.assertNotNull(preorderList);
+        Assert.assertEquals(treeData.size(), preorderList.size());
+        Assert.assertEquals(10, preorderList.get(0).intValue());
+        Assert.assertEquals(1, preorderList.get(1).intValue());
+        Assert.assertEquals(4, preorderList.get(2).intValue());
+        Assert.assertEquals(3, preorderList.get(3).intValue());
+        Assert.assertEquals(5, preorderList.get(4).intValue());
+    }
+
+    @Test
+    public void inOrderTraversalTest() {
+        List<Integer> inOrderList = BinarySearchTreeSolver.getValuesInOrder(this.root);
+        Assert.assertNotNull(inOrderList);
+        Assert.assertEquals(treeData.size(), inOrderList.size());
+        Assert.assertEquals(1, inOrderList.get(0).intValue());
+        Assert.assertEquals(3, inOrderList.get(1).intValue());
+        Assert.assertEquals(4, inOrderList.get(2).intValue());
+        Assert.assertEquals(5, inOrderList.get(3).intValue());
+        Assert.assertEquals(10, inOrderList.get(4).intValue());
+    }
+
+    @Test
+    public void postOrderTraversalTest() {
+        List<Integer> postOrderList = BinarySearchTreeSolver.getValuesPostOrder(this.root);
+        Assert.assertNotNull(postOrderList);
+        Assert.assertEquals(treeData.size(), postOrderList.size());
+        Assert.assertEquals(3, postOrderList.get(0).intValue());
+        Assert.assertEquals(5, postOrderList.get(1).intValue());
+        Assert.assertEquals(4, postOrderList.get(2).intValue());
+        Assert.assertEquals(1, postOrderList.get(3).intValue());
+        Assert.assertEquals(11, postOrderList.get(4).intValue());
+    }
 }

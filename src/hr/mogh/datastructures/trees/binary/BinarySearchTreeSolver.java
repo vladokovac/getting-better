@@ -2,6 +2,7 @@ package hr.mogh.datastructures.trees.binary;
 
 import hr.mogh.datastructures.trees.BinaryTreeNode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -116,5 +117,33 @@ public class BinarySearchTreeSolver {
         return node.getRightChild() != null ? findMax(node.getRightChild()) : node;
     }
 
+    public static List<Integer> getValuesPreOrder(BinaryTreeNode node) {
+        List<Integer> resultList = new ArrayList<>();
+        if (node != null) {
+            resultList.add(node.getValue());
+            resultList.addAll(getValuesPreOrder(node.getLeftChild()));
+            resultList.addAll(getValuesPreOrder(node.getRightChild()));
+        }
+        return resultList;
+    }
 
+    public static List<Integer> getValuesInOrder(BinaryTreeNode node) {
+        List<Integer> resultList = new ArrayList<>();
+        if (node != null) {
+            resultList.addAll(getValuesInOrder(node.getLeftChild()));
+            resultList.add(node.getValue());
+            resultList.addAll(getValuesInOrder(node.getRightChild()));
+        }
+        return resultList;
+    }
+
+    public static List<Integer> getValuesPostOrder(BinaryTreeNode node) {
+        List<Integer> resultList = new ArrayList<>();
+        if (node != null) {
+            resultList.addAll(getValuesPostOrder(node.getLeftChild()));
+            resultList.addAll(getValuesPostOrder(node.getRightChild()));
+            resultList.add(node.getValue());
+        }
+        return resultList;
+    }
 }
