@@ -56,6 +56,18 @@ public class LinkedListTests {
     }
 
     @Test
+    public void reverseFindNodeTest_shouldSucceed() {
+        ListNode node = list.findReverse("nuts");
+        Assert.assertNotNull(node);
+    }
+
+    @Test
+    public void reverseFindNodeTest_shouldFail() {
+        ListNode node = list.findReverse("nutz");
+        Assert.assertNull(node);
+    }
+
+    @Test
     public void insertNodeAfterTest() {
         String insertedData = "brownfox";
         ListNode node = list.find("nuts");
