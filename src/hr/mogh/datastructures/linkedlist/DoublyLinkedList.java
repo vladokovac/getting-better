@@ -48,6 +48,20 @@ public class DoublyLinkedList {
         return result;
     }
 
+    public ListNode findReverse(Object data) {
+        ListNode node = lastNode;
+        ListNode result = null;
+        while (node != null) {
+            if (node.getValue().equals(data)) {
+                result = node;
+                break;
+            } else {
+                node = node.getNodeBefore();
+            }
+        }
+        return result;
+    }
+
     public void insertAfter(ListNode node, Object newData) {
         if (node != null) {
             ListNode newNode = new ListNode(newData);

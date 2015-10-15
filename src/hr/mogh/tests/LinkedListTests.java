@@ -57,29 +57,37 @@ public class LinkedListTests {
 
     @Test
     public void insertNodeAfterTest() {
+        String insertedData = "brownfox";
         ListNode node = list.find("nuts");
         ListNode oldNodeBefore = node.getNodeBefore();
         ListNode oldNodeAfter = node.getNodeAfter();
-        list.insertAfter(node, "brownfox");
-        ListNode insertedNode = list.find("brownfox");
+        list.insertAfter(node, insertedData);
+        ListNode insertedNode = list.find(insertedData);
         Assert.assertNotNull(insertedNode);
         Assert.assertEquals(node.getNodeAfter(), insertedNode);
         Assert.assertEquals(insertedNode.getNodeBefore(), node);
         Assert.assertEquals(oldNodeBefore, node.getNodeBefore());
         Assert.assertEquals(oldNodeAfter, insertedNode.getNodeAfter());
+        // Check the insertion by looking for the node in reverse. This checks that the reverse links are correctly set.
+        insertedNode = list.findReverse(insertedData);
+        Assert.assertNotNull(insertedNode);
     }
 
     @Test
     public void insertNodeBeforeTest() {
+        String insertedData = "brownfox";
         ListNode node = list.find("nuts");
         ListNode oldNodeBefore = node.getNodeBefore();
         ListNode oldNodeAfter = node.getNodeAfter();
-        list.insertBefore(node, "brownfox");
-        ListNode insertedNode = list.find("brownfox");
+        list.insertBefore(node, insertedData);
+        ListNode insertedNode = list.find(insertedData);
         Assert.assertNotNull(insertedNode);
         Assert.assertEquals(node.getNodeBefore(), insertedNode);
         Assert.assertEquals(insertedNode.getNodeAfter(), node);
         Assert.assertEquals(oldNodeBefore, insertedNode.getNodeBefore());
         Assert.assertEquals(oldNodeAfter, node.getNodeAfter());
+        // Check the insertion by looking for the node in reverse. This checks that the reverse links are correctly set.
+        insertedNode = list.findReverse(insertedData);
+        Assert.assertNotNull(insertedNode);
     }
 }
