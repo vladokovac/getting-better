@@ -1,7 +1,5 @@
 package hr.mogh.datastructures.hashtable;
 
-import hr.mogh.datastructures.linkedlist.ListNode;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -11,19 +9,19 @@ import java.util.Set;
  * Created by vlado on 19.10.2015.
  */
 public class SuperHashTable<K, V> implements Map<K, V> {
-    ListNode[] dataTable;
-    int size;
+    HashNode<K, V>[] dataTable;
+    int tableSize;
     int count;
 
-    public SuperHashTable(int size) {
-        this.size = size;
+    public SuperHashTable(int tableSize) {
+        this.tableSize = tableSize;
         this.count = 0;
-        this.dataTable = new ListNode[size];
+        this.dataTable = new HashNode[tableSize];
     }
 
     @Override
     public int size() {
-        return size;
+        return count;
     }
 
     @Override
@@ -34,7 +32,7 @@ public class SuperHashTable<K, V> implements Map<K, V> {
 
     @Override
     public boolean containsKey(Object key) {
-        return false;
+        return this.get(key) != null;
     }
 
     @Override
@@ -44,44 +42,85 @@ public class SuperHashTable<K, V> implements Map<K, V> {
 
     @Override
     public V get(Object key) {
-        return null;
+        int index = this.calculateHash(key.toString());
+        HashNode<K, V> node = dataTable[index];
+        V value = null;
+        if (node != null) {
+            do {
+                if (node.getKey().equals(key)) {
+                    value = node.getValue();
+                    break;
+                } else {
+                    node = node.getNextNode();
+                }
+            } while (node != null);
+        }
+        return value;
     }
 
     @Override
     public V put(K key, V value) {
-        int index = this.calculateIndex(key.toString());
-        ListNode node = dataTable[index];
-        ListNode newNode = new ListNode(value);
+        int index = this.calculateHash(key.toString());
+        HashNode<K, V> node = dataTable[index];
+        HashNode<K, V> prevNode = null;
+        HashNode<K, V> newNode = new HashNode<>(key, value);
+        V replacedValue = null;
+        boolean isValueInserted = false;
 
         if (node != null) {
-            while (node.getNodeAfter() != null) {
-                node = node.getNodeAfter();
+            do {
+                if (node.key.equals(key)) {
+                    // update value
+                    replacedValue = node.getValue();
+                    node.setValue(value);
+                    isValueInserted = true;
+                    break;
+                } else {
+                    prevNode = node;
+                    node = node.getNextNode();
+                }
+            } while (node != null);
+            if (!isValueInserted) {
+                prevNode.setNextNode(newNode);
+                isValueInserted = true;
             }
-            node.setNodeAfter(newNode);
         } else {
             dataTable[index] = newNode;
+            isValueInserted = true;
         }
-        return null;
+        if (isValueInserted) {
+            this.count++;
+        }
+        return replacedValue;
     }
 
     @Override
     public V remove(Object key) {
-        int index = this.calculateIndex(key.toString());
-        ListNode node = dataTable[index];
-        V returnValue = null;
+        int index = this.calculateHash(key.toString());
+        HashNode<K, V> node = dataTable[index];
+        HashNode<K, V> prevNode = null;
+        V removedNodeValue = null;
 
         if (node != null) {
-            while(node.getNodeAfter() != null) {
-                node = node.getNodeAfter();
-            }
-            ListNode parentNode = node.getNodeBefore();
-            if (parentNode != null) {
-                parentNode.setNodeAfter(null);
-            }
-            returnValue = (V)node.getValue();
+            do {
+                if (node.getKey().equals(key)) {
+                    // delete the node
+                    removedNodeValue = node.getValue();
+                    if (prevNode != null) {
+                        prevNode.setNextNode(node.getNextNode());
+                    } else {
+                        dataTable[index] = node.getNextNode();
+                    }
+                    this.count--;
+                    break;
+                } else {
+                    prevNode = node;
+                    node = node.getNextNode();
+                }
+            } while (node != null);
         }
 
-        return returnValue;
+        return removedNodeValue;
     }
 
     @Override
@@ -91,7 +130,8 @@ public class SuperHashTable<K, V> implements Map<K, V> {
 
     @Override
     public void clear() {
-
+        dataTable = new HashNode[this.tableSize];
+        this.count = 0;
     }
 
     @Override
@@ -109,11 +149,11 @@ public class SuperHashTable<K, V> implements Map<K, V> {
         return null;
     }
 
-    private int calculateIndex(String key) {
+    private int calculateHash(String key) {
         long sum = 0;
-        for(char letter : key.toCharArray()) {
+        for (char letter : key.toCharArray()) {
             sum += letter;
         }
-        return (int)(sum % this.size);
+        return (int) (sum % this.tableSize);
     }
 }
