@@ -108,7 +108,7 @@ public class SuperHashTableTests {
     }
 
     @Test
-    public void removeTest_noSuchKey() {
+    public void removeTest_noSuchKeyExists() {
         String tableKey1 = "TestKey";
         String tableKey2 = "eTstKey";
         String tableValue = "TestValue";
@@ -118,5 +118,33 @@ public class SuperHashTableTests {
         int sizeAfter = superHashTable.size();
         Assert.assertNull(value);
         Assert.assertEquals(sizeBefore, sizeAfter);
+    }
+
+    @Test
+    public void clearMapTest() {
+        String tableKey = "TestKey";
+        String tableValue = "TestValue";
+        superHashTable.put(tableKey, tableValue);
+        int sizeBefore = superHashTable.size();
+        superHashTable.clear();
+        int sizeAfter = superHashTable.size();
+        Assert.assertEquals(sizeBefore - 1, sizeAfter);
+    }
+
+    @Test
+    public void containsKeyTest_keyExists() {
+        String tableKey = "TestKey";
+        String tableValue = "TestValue";
+        superHashTable.put(tableKey, tableValue);
+        Assert.assertTrue(superHashTable.containsKey(tableKey));
+    }
+
+    @Test
+    public void containsKeyTest_noSuchKeyExists() {
+        String tableKey1 = "TestKey";
+        String tableKey2 = "eTstKey";
+        String tableValue = "TestValue";
+        superHashTable.put(tableKey1, tableValue);
+        Assert.assertFalse(superHashTable.containsKey(tableKey2));
     }
 }
