@@ -1,8 +1,6 @@
 package hr.mogh.datastructures.hashtable;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A hash table implementation.
@@ -26,7 +24,6 @@ public class SuperHashTable<K, V> implements Map<K, V> {
 
     @Override
     public boolean isEmpty() {
-
         return this.count == 0;
     }
 
@@ -42,10 +39,10 @@ public class SuperHashTable<K, V> implements Map<K, V> {
             HashNode<K, V> node = dataTable[i];
             if (node != null) {
                 do {
-                    if (node.getValue().equals(value)){
+                    if (node.getValue().equals(value)) {
                         isValueFound = true;
                         break;
-                    }else {
+                    } else {
                         node = node.getNextNode();
                     }
                 } while (node != null);
@@ -155,12 +152,33 @@ public class SuperHashTable<K, V> implements Map<K, V> {
 
     @Override
     public Set<K> keySet() {
-        return null;
+        Set<K> keySet = new HashSet<>();
+
+        for (int i = 0; i < tableSize; i++) {
+            HashNode<K, V> node = dataTable[i];
+            if (node != null) {
+                do {
+                    keySet.add(node.getKey());
+                    node = node.getNextNode();
+                } while (node != null);
+            }
+        }
+        return keySet;
     }
 
     @Override
     public Collection<V> values() {
-        return null;
+        List<V> valueList = new ArrayList<>();
+        for (int i = 0; i < tableSize; i++) {
+            HashNode<K, V> node = dataTable[i];
+            if (node != null) {
+                do {
+                    valueList.add(node.getValue());
+                    node = node.getNextNode();
+                } while (node != null);
+            }
+        }
+        return valueList;
     }
 
     @Override

@@ -6,8 +6,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Contains tests written to ensure SuperHashTable works as intended.
@@ -152,7 +154,7 @@ public class SuperHashTableTests {
     }
 
     @Test
-    public void containsValueTest_valueExists(){
+    public void containsValueTest_valueExists() {
         String tableKey = "TestKey";
         String tableValue = "TestValue";
         superHashTable.put(tableKey, tableValue);
@@ -180,5 +182,45 @@ public class SuperHashTableTests {
         superHashTable.putAll(testMap);
         Assert.assertEquals(tableValue1, superHashTable.get(tableKey1));
         Assert.assertEquals(tableValue2, superHashTable.get(tableKey2));
+    }
+
+    @Test
+    public void keySetTest_tableWithEntries() {
+        String tableKey1 = "TestKey1";
+        String tableValue1 = "TestValue1";
+        String tableKey2 = "TestKey2";
+        String tableValue2 = "TestValue2";
+        superHashTable.put(tableKey1, tableValue1);
+        superHashTable.put(tableKey2, tableValue2);
+        Set<String> keySet = superHashTable.keySet();
+        Assert.assertEquals(2, keySet.size());
+        Assert.assertTrue(keySet.contains(tableKey1));
+        Assert.assertTrue(keySet.contains(tableKey2));
+    }
+
+    @Test
+    public void keySetTest_emptyTable() {
+        Set<String> keySet = superHashTable.keySet();
+        Assert.assertEquals(0, keySet.size());
+    }
+
+    @Test
+    public void valuesTest_tableWithEntries() {
+        String tableKey1 = "TestKey1";
+        String tableValue1 = "TestValue1";
+        String tableKey2 = "TestKey2";
+        String tableValue2 = "TestValue2";
+        superHashTable.put(tableKey1, tableValue1);
+        superHashTable.put(tableKey2, tableValue2);
+        Collection<String> valueCollection = superHashTable.values();
+        Assert.assertEquals(2, valueCollection.size());
+        Assert.assertTrue(valueCollection.contains(tableValue1));
+        Assert.assertTrue(valueCollection.contains(tableValue2));
+    }
+
+    @Test
+    public void valuesTest_emptyTable() {
+        Collection<String> valueCollection = superHashTable.values();
+        Assert.assertEquals(0, valueCollection.size());
     }
 }
