@@ -26,7 +26,7 @@ public class ArrayFlattenerTests {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         inputArray = null;
     }
 
@@ -34,5 +34,11 @@ public class ArrayFlattenerTests {
     public void flattenArrayTest() {
         Integer[] flattenedArray = ArrayFlattener.flattenArray(inputArray);
         Assert.assertEquals(10, flattenedArray.length);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void flattenArrayTest_invalidData() {
+        Object[] input = {1, "b", "c"};
+        ArrayFlattener.flattenArray(input);
     }
 }

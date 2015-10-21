@@ -20,15 +20,20 @@ public class ArrayFlattener {
         for (int i = 0; i < array.length; i++) {
             Object arrayValue = array[i];
             try {
-                Integer arrayInteger = (Integer)arrayValue;
-                flatList.add(arrayInteger);
-            } catch (ClassCastException cce) {
                 Object[] subArray = (Object[]) arrayValue;
                 Integer[] flattenedSubArray = ArrayFlattener.flattenArray(subArray);
                 if (flattenedSubArray != null) {
                     for (int j = 0; j < flattenedSubArray.length; j++) {
                         flatList.add(flattenedSubArray[j]);
                     }
+                }
+            } catch (ClassCastException cce) {
+                if (arrayValue instanceof Integer) {
+                    Integer arrayInteger = (Integer) arrayValue;
+                    flatList.add(arrayInteger);
+                } else {
+                    throw new IllegalArgumentException("ArrayFlattener.flattenArray accepts only arrays where " +
+                            "elements are either subarrays or Integers.");
                 }
             }
         }
