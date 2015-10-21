@@ -38,7 +38,8 @@ public class ArrayFlattenerTests {
 
     @Test(expected = IllegalArgumentException.class)
     public void flattenArrayTest_invalidData() {
-        Object[] input = {1, "b", "c"};
+        Object[] inputSubarray = {1, "b", "c"};
+        Object[] input = {1, inputSubarray};
         ArrayFlattener.flattenArray(input);
     }
 }
