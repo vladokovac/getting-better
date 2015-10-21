@@ -147,4 +147,21 @@ public class SuperHashTableTests {
         superHashTable.put(tableKey1, tableValue);
         Assert.assertFalse(superHashTable.containsKey(tableKey2));
     }
+
+    @Test
+    public void containsValueTest_valueExists(){
+        String tableKey = "TestKey";
+        String tableValue = "TestValue";
+        superHashTable.put(tableKey, tableValue);
+        Assert.assertTrue(superHashTable.containsValue(tableValue));
+    }
+
+    @Test
+    public void containsValueTest_noSuchValueExists() {
+        String tableKey = "TestKey";
+        String tableValue1 = "TestValue1";
+        String tableValue2 = "TestValue2";
+        superHashTable.put(tableKey, tableValue1);
+        Assert.assertFalse(superHashTable.containsValue(tableValue2));
+    }
 }

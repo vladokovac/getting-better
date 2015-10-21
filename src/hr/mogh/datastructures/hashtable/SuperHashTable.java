@@ -37,7 +37,24 @@ public class SuperHashTable<K, V> implements Map<K, V> {
 
     @Override
     public boolean containsValue(Object value) {
-        return false;
+        boolean isValueFound = false;
+        for (int i = 0; i < tableSize; i++) {
+            HashNode<K, V> node = dataTable[i];
+            if (node != null) {
+                do {
+                    if (node.getValue().equals(value)){
+                        isValueFound = true;
+                        break;
+                    }else {
+                        node = node.getNextNode();
+                    }
+                } while (node != null);
+            }
+            if (isValueFound) {
+                break;
+            }
+        }
+        return isValueFound;
     }
 
     @Override
