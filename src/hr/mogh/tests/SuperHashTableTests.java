@@ -6,6 +6,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Contains tests written to ensure SuperHashTable works as intended.
  * Created by vlado on 20.10.2015.
@@ -163,5 +166,19 @@ public class SuperHashTableTests {
         String tableValue2 = "TestValue2";
         superHashTable.put(tableKey, tableValue1);
         Assert.assertFalse(superHashTable.containsValue(tableValue2));
+    }
+
+    @Test
+    public void putAllTest_emptyTable() {
+        String tableKey1 = "TestKey1";
+        String tableValue1 = "TestValue1";
+        String tableKey2 = "TestKey2";
+        String tableValue2 = "TestValue2";
+        Map<String, String> testMap = new HashMap<>();
+        testMap.put(tableKey1, tableValue1);
+        testMap.put(tableKey2, tableValue2);
+        superHashTable.putAll(testMap);
+        Assert.assertEquals(tableValue1, superHashTable.get(tableKey1));
+        Assert.assertEquals(tableValue2, superHashTable.get(tableKey2));
     }
 }

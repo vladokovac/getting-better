@@ -142,7 +142,9 @@ public class SuperHashTable<K, V> implements Map<K, V> {
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
-
+        for (K key : m.keySet()) {
+            this.put(key, m.get(key));
+        }
     }
 
     @Override
