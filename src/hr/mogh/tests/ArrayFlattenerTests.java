@@ -1,6 +1,6 @@
 package hr.mogh.tests;
 
-import hr.mogh.problems.intercom.ArrayFlattener;
+import hr.mogh.problems.intercom.arrayflattening.ArrayFlattener;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

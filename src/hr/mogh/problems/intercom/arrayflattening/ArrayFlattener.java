@@ -1,4 +1,4 @@
-package hr.mogh.problems.intercom;
+package hr.mogh.problems.intercom.arrayflattening;
 
 import java.util.ArrayList;
 import java.util.List;
