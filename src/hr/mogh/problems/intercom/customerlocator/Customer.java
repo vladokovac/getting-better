@@ -10,6 +10,9 @@ public class Customer {
     private double longitude;
     private double latitude;
 
+    public Customer() {
+    }
+
     public Customer(int id, String name, double longitude, double latitude) {
         this.id = id;
         this.name = name;
@@ -31,5 +34,21 @@ public class Customer {
 
     public double getLatitude() {
         return latitude;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }
