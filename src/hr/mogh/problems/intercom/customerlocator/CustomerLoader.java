@@ -30,7 +30,14 @@ public class CustomerLoader {
         try {
             while ((customerData = bufferedReader.readLine()) != null) {
                 String[] splitDataArray = customerData.substring(1, customerData.length() - 1).split(",");
-                Customer customer = new Customer();
+                double longitude = 0;
+                double latitude = 0;
+                int userId = 0;
+                String username = "";
+                boolean isLongitudeSet = false;
+                boolean isLatitudeSet = false;
+                boolean isUserIdSet = false;
+                boolean isUsernameSet = false;
                 for (String data : splitDataArray) {
                     String[] splitData = data.split(":");
                     if (splitData.length == 2) {
@@ -39,27 +46,34 @@ public class CustomerLoader {
                         if (dataKey.equals("longitude")) {
                             String trimmedValue = splitData[1].trim();
                             String dataValue = trimmedValue.substring(1, trimmedValue.length() - 1);
-                            double longitude = Double.valueOf(dataValue);
-                            customer.setLongitude(longitude);
+                            longitude = Double.valueOf(dataValue);
+                            isLongitudeSet = true;
                         } else if (dataKey.equals("latitude")) {
                             String trimmedValue = splitData[1].trim();
                             String dataValue = trimmedValue.substring(1, trimmedValue.length() - 1);
-                            double latitude = Double.valueOf(dataValue);
-                            customer.setLatitude(latitude);
+                            latitude = Double.valueOf(dataValue);
+                            isLatitudeSet = true;
                         } else if (dataKey.equals("user_id")) {
                             String dataValue = splitData[1].trim();
-                            int userId = Integer.valueOf(dataValue);
-                            customer.setId(userId);
+                            userId = Integer.valueOf(dataValue);
+                            isUserIdSet = true;
                         } else if (dataKey.equals("name")) {
                             String trimmedValue = splitData[1].trim();
                             String dataValue = trimmedValue.substring(1, trimmedValue.length() - 1);
-                            customer.setName(dataValue);
+                            username = dataValue;
+                            isUsernameSet = true;
                         }
                     } else {
                         throw new InvalidDataException();
                     }
+                    if (isLongitudeSet && isLatitudeSet && isUserIdSet && isUsernameSet) {
+                        break;
+                    }
                 }
-                loadedCustomers.add(customer);
+                if (isLongitudeSet && isLatitudeSet && isUserIdSet && isUsernameSet) {
+                    Customer customer = new Customer(userId, username, longitude, latitude);
+                    loadedCustomers.add(customer);
+                }
             }
         }catch (InvalidDataException ife) {
             throw new InvalidDataException("Error while parsing customer data.");
