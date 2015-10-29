@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Contains tests designed to prove ArrayFlattener works as intended.
+ * Contains tests designed to check if ArrayFlattener works as intended.
  * Created by vlado on 21.10.2015.
  */
 public class ArrayFlattenerTests {
