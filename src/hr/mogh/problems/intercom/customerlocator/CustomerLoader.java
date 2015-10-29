@@ -1,12 +1,10 @@
 package hr.mogh.problems.intercom.customerlocator;
 
 import com.sun.media.sound.InvalidDataException;
-import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 /**
@@ -43,16 +41,16 @@ public class CustomerLoader {
                     if (splitData.length == 2) {
                         String trimmedKey = splitData[0].toLowerCase().trim();
                         String dataKey = trimmedKey.substring(1, trimmedKey.length() - 1);
-                        if (dataKey.equals("longitude")) {
-                            String trimmedValue = splitData[1].trim();
-                            String dataValue = trimmedValue.substring(1, trimmedValue.length() - 1);
-                            longitude = Double.valueOf(dataValue);
-                            isLongitudeSet = true;
-                        } else if (dataKey.equals("latitude")) {
+                        if (dataKey.equals("latitude")) {
                             String trimmedValue = splitData[1].trim();
                             String dataValue = trimmedValue.substring(1, trimmedValue.length() - 1);
                             latitude = Double.valueOf(dataValue);
                             isLatitudeSet = true;
+                        } else if (dataKey.equals("longitude")) {
+                            String trimmedValue = splitData[1].trim();
+                            String dataValue = trimmedValue.substring(1, trimmedValue.length() - 1);
+                            longitude = Double.valueOf(dataValue);
+                            isLongitudeSet = true;
                         } else if (dataKey.equals("user_id")) {
                             String dataValue = splitData[1].trim();
                             userId = Integer.valueOf(dataValue);
@@ -71,11 +69,11 @@ public class CustomerLoader {
                     }
                 }
                 if (isLongitudeSet && isLatitudeSet && isUserIdSet && isUsernameSet) {
-                    Customer customer = new Customer(userId, username, longitude, latitude);
+                    Customer customer = new Customer(userId, username, latitude, longitude);
                     loadedCustomers.add(customer);
                 }
             }
-        }catch (InvalidDataException ife) {
+        } catch (InvalidDataException ife) {
             throw new InvalidDataException("Error while parsing customer data.");
         } catch (IOException ioe) {
             throw new IOException("Error while reading customer data.");
