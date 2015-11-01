@@ -30,7 +30,7 @@ public class PrimeExpressibleSolver {
             requiredListSize++;
             requiredListSize = requiredListSize * (requiredListSize + 1) / 2;
         }
-        
+
         int i = 0;
         while (allNumbersList.size() < requiredListSize) {
             for (int j = i; j >= 0; j--) {
