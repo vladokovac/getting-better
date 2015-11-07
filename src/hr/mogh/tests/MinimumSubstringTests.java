@@ -19,4 +19,13 @@ public class MinimumSubstringTests {
         Assert.assertTrue(minString.length() > 0);
         Assert.assertEquals("banc", minString);
     }
+
+    @Test
+    public void findMinimumSubstringWindowTest() {
+        String input = "adobecodebanc";
+        String substringElements = "abc";
+        String minString = MinimumSubstringSolver.findMinimumSubstringWindow(input, substringElements);
+        Assert.assertTrue(minString.length() > 0);
+        Assert.assertEquals("banc", minString);
+    }
 }

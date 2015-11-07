@@ -16,6 +16,14 @@ import java.util.Set;
  */
 public class MinimumSubstringSolver {
 
+    /**
+     * Finds the minimum substring that contains all search elements.<br/>
+     * Space complexity: O(n)<br/>
+     * Time complexity: O(n^2)
+     * @param input The string in which the substring is to be found.
+     * @param searchElements The list of unique characters that need to be found in the input.
+     * @return The minimum substring. <code>null</code> if no such substring exists.
+     */
     public static String findMinumumSubstring(String input, String searchElements) {
         String minimumSubstring = "";
 
@@ -63,5 +71,71 @@ public class MinimumSubstringSolver {
         }
 
         return minimumSubstring;
+    }
+
+    /**
+     * Finds the minimum substring that contains all search elements. Uses resizing rolling window.<br/>
+     * Space complexity: O(n)<br/>
+     * Time complexity: O(n)
+     * @param input The string in which the substring is to be found.
+     * @param searchElements The list of unique characters that need to be found in the input.
+     * @return The minimum substring. <code>null</code> if no such substring exists.
+     */
+    public static String findMinimumSubstringWindow(String input, String searchElements) {
+        if (input == null || input.length() == 0) {
+            return null;
+        }
+        if (searchElements == null || searchElements.length() == 0) {
+            return null;
+        }
+        if (input.length() < searchElements.length()) {
+            return null;
+        }
+
+        int[] foundCharactersCount = new int[256];
+        Set<Character> foundCharacters = new HashSet<>();
+        Set<Character> allSearchElements = new HashSet<>();
+        for (int i = 0; i < searchElements.length(); i++) {
+            allSearchElements.add(searchElements.charAt(i));
+        }
+
+        int j = 0;
+        int i = 0;
+
+        int minSize = Integer.MAX_VALUE;
+        int minIndex = 0;
+
+        while (j < input.length()) {
+            Character currentCharacter = input.charAt(j);
+            if (allSearchElements.contains(currentCharacter)) {
+                foundCharactersCount[currentCharacter]++;
+                if (!foundCharacters.contains(currentCharacter)) {
+                    foundCharacters.add(currentCharacter);
+                }
+            }
+
+            if (foundCharacters.size() == allSearchElements.size()) {
+                while (i < j) {
+                    Character charInFront = input.charAt(i);
+                    if (allSearchElements.contains(charInFront)) {
+                        if (foundCharactersCount[currentCharacter] > 1) {
+                            foundCharactersCount[currentCharacter]--;
+                        } else {
+                            break;
+                        }
+                    }
+                    i++;
+                }
+
+                if (j - i < minSize) {
+                    minSize = j - i;
+                    minIndex = i;
+                }
+            }
+
+            j++;
+        }
+
+        return input.substring(minIndex, minIndex + minSize + 1);
     }
 }
