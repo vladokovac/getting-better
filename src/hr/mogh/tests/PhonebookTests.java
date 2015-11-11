@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Contains tests designed to check if Phonebook works as intended.<p/>
  * Created by vlado on 10.11.2015.
+ * @see Phonebook Phonebook
  */
 public class PhonebookTests {
 
