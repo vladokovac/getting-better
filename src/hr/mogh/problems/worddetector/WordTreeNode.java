@@ -59,4 +59,8 @@ public class WordTreeNode {
             return this.parent.getParentToNodeString() + this.value;
         }
     }
+
+    public void setIsLastCharInWord(boolean isLastCharInWord) {
+        this.isLastCharInWord = isLastCharInWord;
+    }
 }
