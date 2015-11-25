@@ -15,12 +15,33 @@ import java.util.List;
  */
 public class WordDetectorTests {
 
-    private static List<String> availableWords = new ArrayList<>(Arrays.asList("ok","test","one","try","trying"));
+    private static List<String> availableWords = new ArrayList<>(Arrays.asList("ok","test","one","try","trying", "determination", "term", "er", "nation", "at", "ion", "on", "deter"));
 
     @Test
-    public void detectWordTest() {
+    public void detectWordsTest_1() {
         List<String> results = WordDetectorSolver.detectWords("abcokdeftrying", availableWords);
         Assert.assertNotNull(results);
         Assert.assertEquals(3, results.size());
+    }
+
+    @Test
+    public void detectWordsTest_2() {
+        List<String> results = WordDetectorSolver.detectWords("determinationerabcde", availableWords);
+        Assert.assertNotNull(results);
+        Assert.assertEquals(10, results.size());
+    }
+
+    @Test
+    public void nullInput() {
+        List<String> results = WordDetectorSolver.detectWords(null, availableWords);
+        Assert.assertNotNull(results);
+        Assert.assertEquals(0, results.size());
+    }
+
+    @Test
+    public void noAvailableWords() {
+        List<String> results = WordDetectorSolver.detectWords("abcokdeftrying", null);
+        Assert.assertNotNull(results);
+        Assert.assertEquals(0, results.size());
     }
 }

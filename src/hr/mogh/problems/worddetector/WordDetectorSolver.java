@@ -20,6 +20,10 @@ public class WordDetectorSolver {
 
     public static List<String> detectWords(String charStream, List<String> availableWords) {
 
+        if (charStream == null || charStream.length() == 0 || availableWords == null ||availableWords.size() == 0) {
+            return new ArrayList<>();
+        }
+
         // create word tree
         WordTreeNode root = new WordTreeNode(null, null, false);
         for (String word : availableWords) {
@@ -33,6 +37,9 @@ public class WordDetectorSolver {
                         // character is already represented in the tree
                         currentNode = child;
                         isChildWithLetterFound = true;
+                        if (i == word.length() - 1) {
+                            currentNode.setIsLastCharInWord(true);
+                        }
                         break;
                     }
                 }
