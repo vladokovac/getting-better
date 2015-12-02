@@ -21,11 +21,20 @@ public class MinimumSubstringTests {
     }
 
     @Test
-    public void findMinimumSubstringWindowTest() {
+    public void findMinimumSubstringWindowTest_1() {
         String input = "adobecodebanc";
         String substringElements = "abc";
         String minString = MinimumSubstringSolver.findMinimumSubstringWindow(input, substringElements);
         Assert.assertTrue(minString.length() > 0);
         Assert.assertEquals("banc", minString);
+    }
+
+    @Test
+    public void findMinimumSubstringWindowTest_2() {
+        String input = "bancba";
+        String substringElements = "abc";
+        String minString = MinimumSubstringSolver.findMinimumSubstringWindow(input, substringElements);
+        Assert.assertTrue(minString.length() > 0);
+        Assert.assertEquals("cba", minString);
     }
 }
