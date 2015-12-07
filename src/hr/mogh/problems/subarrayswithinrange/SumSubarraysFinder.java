@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Solves the following problem:<br/>
- * <code>Given an array int32 arr[] of size n, return the number of non-empty contigious subarrays whose sum lies in
+ * <code>Given an array int32 arr[] of size n, return the number of non-empty contiguous subarrays whose sum lies in
  * range [a, b]
  * <p/>
  * That is, implement the following naive algorithm faster than O(n^2)
