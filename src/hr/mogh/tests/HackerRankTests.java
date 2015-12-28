@@ -23,4 +23,33 @@ public class HackerRankTests {
         Assert.assertEquals('#', staircase.charAt(11));
         Assert.assertEquals('#', staircase.charAt(12));
     }
+
+    @Test
+    public void calculateDiagonalDiffTest() {
+        int n = 3;
+        int[][] matrix = new int[][]{{11, 2, 4}, {4, 5, 6}, {10, 8, -12}};
+        int sum = Shorties.calculateDiagonalDifference(n, matrix);
+        Assert.assertEquals(15, sum);
+    }
+
+    @Test
+    public void getUtopianTreeSizeTest() {
+        int[] cycles = new int[]{0, 1, 4};
+        int[] expectedResults = new int[]{1, 2, 7};
+
+        for (int i = 0; i < cycles.length; i++) {
+            int treeSize = Shorties.getUtopianTreeSize(cycles[i]);
+            Assert.assertEquals(expectedResults[i], treeSize);
+        }
+    }
+
+    @Test
+    public void findDivisibleDigitsTest() {
+        int[] digits = new int[]{1, 12, 1234, 2222, 20};
+        int[] expectedResults = new int[]{1, 2, 2, 4, 1};
+        for (int i = 0; i < digits.length; i++) {
+            int digitCount = Shorties.findDivisibleDigits(digits[i]);
+            Assert.assertEquals(expectedResults[i], digitCount);
+        }
+    }
 }

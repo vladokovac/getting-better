@@ -10,6 +10,7 @@ public class Shorties {
      * Sums big integers in an array.<br/>
      * Space complexity : <code>O(n)</code>.<br/>
      * Time complexity: <code>O(n)</code>.
+     *
      * @param numbers Numbers to be summed.
      * @return A big sum.
      */
@@ -25,6 +26,7 @@ public class Shorties {
      * Draws a staircase made out of hash tags.<br/>
      * Space complexity: <code>O(n)</code>.<br/>
      * Time complexity: <code>O(n^2)</code>.
+     *
      * @param height The height of the staircase.
      * @return The ASCII staircase.
      */
@@ -47,5 +49,70 @@ public class Shorties {
 
         System.out.println(staircase);
         return staircase;
+    }
+
+    /**
+     * Calculate the absolute difference between the sums of integers on the two diagonals of a square matrix of
+     * numbers.
+     *
+     * @param n      The size (width or height) of the matrix.
+     * @param matrix The integer matrix.
+     * @return Absolute difference between the diagonal sums.
+     */
+    public static int calculateDiagonalDifference(int n, int[][] matrix) {
+        int sumDiagTopLeft = 0;
+        int sumDiagBotLeft = 0;
+
+        for (int i = 0; i < n; i++) {
+            sumDiagBotLeft += matrix[i][n - 1 - i];
+            sumDiagTopLeft += matrix[i][i];
+        }
+
+        return Math.abs(sumDiagBotLeft - sumDiagTopLeft);
+    }
+
+    /**
+     * Calculates the size of The Utopian Tree. The tree grows according to the following rules:<br/>
+     * <code>The Utopian Tree goes through 2 cycles of growth every year. Each spring, it doubles in height. Each
+     * summer, its height increases by 1 meter.</code>
+     *
+     * @param growthCycles The number of growth cycles the tree goes through.
+     * @return Size of the tree after <code>growthCycles</code> cycles.
+     */
+    public static int getUtopianTreeSize(int growthCycles) {
+        int size = 1;
+
+        for (int i = 0; i < growthCycles; i++) {
+            if (i % 2 == 0) {
+                size *= 2;
+            } else {
+                size += 1;
+            }
+        }
+
+        return size;
+    }
+
+    /**
+     * Finds the number of digits in a number that divide the number evenly.
+     *
+     * @param number Input number.
+     * @return The number of evenly-dividing digits.
+     */
+    public static int findDivisibleDigits(int number) {
+        int divisibleDigits = 0;
+        int mod = 10;
+        int div = 1;
+        while (div <= number) {
+            int digit = number % mod;
+            digit /= div;
+            if (digit != 0 && number % digit == 0) {
+                divisibleDigits++;
+            }
+
+            mod *= 10;
+            div *= 10;
+        }
+        return divisibleDigits;
     }
 }
