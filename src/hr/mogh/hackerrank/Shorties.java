@@ -1,5 +1,8 @@
 package hr.mogh.hackerrank;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Small problems found on HackerRank.com.
  * Created by vlado on 7.12.2015.
@@ -145,5 +148,43 @@ public class Shorties {
         }
 
         return squareIntCount;
+    }
+
+    /**
+     * Cuts sticks in rounds. Counts how many sticks were cut in each round. Sticks are cut until there are no more
+     * sticks to cut. The length of the cut is determined by the shortest stick.<br/>
+     * Space complexity: <code>O(n)</code>.<br/>
+     * Time complexity: <code>O(n^2)</code>.
+     *
+     * @param initialStickLengths Initial stick lengths.
+     * @return A list containing the number of sticks that were cut in each roung of cutting.
+     */
+    public static List<Integer> countCutSticks(List<Integer> initialStickLengths) {
+        List<Integer> cutSticksList = new ArrayList<>();
+        List<Integer> stickLengths = initialStickLengths;
+        while (stickLengths.size() > 0) {
+            int cutLength;
+            int minLength = Integer.MAX_VALUE;
+
+            // find shortest stick so we know how long the cut is
+            for (int i = 0; i < stickLengths.size(); i++) {
+                if (stickLengths.get(i) < minLength) {
+                    minLength = stickLengths.get(i);
+                }
+            }
+            cutLength = minLength;
+
+            // cut the sticks
+            List<Integer> nextStickLengths = new ArrayList<>();
+            cutSticksList.add(stickLengths.size());
+            for (int i = 0; i < stickLengths.size(); i++) {
+                if (stickLengths.get(i) > cutLength) {
+                    nextStickLengths.add(stickLengths.get(i) - cutLength);
+                }
+            }
+            stickLengths = nextStickLengths;
+        }
+
+        return cutSticksList;
     }
 }

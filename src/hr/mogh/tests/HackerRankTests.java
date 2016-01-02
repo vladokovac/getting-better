@@ -4,6 +4,10 @@ import hr.mogh.hackerrank.Shorties;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by vlado on 7.12.2015.
  */
@@ -55,8 +59,8 @@ public class HackerRankTests {
 
     @Test
     public void countSquareIntegersTest() {
-        int [][]ranges = new int[][]{{1, 1}, {3, 9}, {17, 24}, {465868129, 988379794}};
-        int [] expectedCounts = new int[]{1,2,0, 9855};
+        int[][] ranges = new int[][]{{1, 1}, {3, 9}, {17, 24}, {465868129, 988379794}};
+        int[] expectedCounts = new int[]{1, 2, 0, 9855};
         for (int i = 0; i < ranges.length; i++) {
             int count = Shorties.countSquareIntegers(ranges[i][0], ranges[i][1]);
             Assert.assertEquals(expectedCounts[i], count);
@@ -67,5 +71,25 @@ public class HackerRankTests {
     public void countSquareIntegersTest_invalidInput() {
         int count = Shorties.countSquareIntegers(4, 2);
         Assert.assertEquals(0, count);
+    }
+
+    @Test
+    public void countCutSticksTest_1() {
+        List<Integer> stickLengths = Arrays.asList(5, 4, 4, 2, 2, 8);
+        int[] expectedStickCounts = new int[]{6, 4, 2, 1};
+        List<Integer> countedCutSticks = Shorties.countCutSticks(stickLengths);
+        for (int i = 0; i < expectedStickCounts.length; i++) {
+            Assert.assertEquals(expectedStickCounts[i], countedCutSticks.get(i).intValue());
+        }
+    }
+
+    @Test
+    public void countCutSticksTest_2() {
+        List<Integer> stickLengths = Arrays.asList(1, 2, 3, 4, 3, 3, 2, 1);
+        int[] expectedStickCounts = new int[]{8, 6, 4, 1};
+        List<Integer> countedCutSticks = Shorties.countCutSticks(stickLengths);
+        for (int i = 0; i < expectedStickCounts.length; i++) {
+            Assert.assertEquals(expectedStickCounts[i], countedCutSticks.get(i).intValue());
+        }
     }
 }
