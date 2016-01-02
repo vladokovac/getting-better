@@ -115,4 +115,35 @@ public class Shorties {
         }
         return divisibleDigits;
     }
+
+    /**
+     * Finds all the "square integers" within a range of integers. Square integers are integers that are the result
+     * of a square of any integer. Range boundaries are included in the search.<br/>
+     * Space complexity: <code>O(1)</code>.<br/>
+     * Time complexity: <code>O(sqrt(n))</code>.
+     *
+     * @param lowLimit  Low limit of the range.
+     * @param highLimit High limit of the range.
+     * @return The number of square integers.
+     */
+    public static int countSquareIntegers(long lowLimit, long highLimit) {
+        int squareIntCount = 0;
+        double epsilon = 0.000001;
+
+        if (lowLimit > highLimit) {
+            return 0;
+        }
+
+        int i = 1;
+        long square = 1;
+        while (square <= highLimit) {
+            if (square >= lowLimit && square <= highLimit) {
+                squareIntCount++;
+            }
+            i++;
+            square = i * i;
+        }
+
+        return squareIntCount;
+    }
 }

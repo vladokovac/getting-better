@@ -52,4 +52,20 @@ public class HackerRankTests {
             Assert.assertEquals(expectedResults[i], digitCount);
         }
     }
+
+    @Test
+    public void countSquareIntegersTest() {
+        int [][]ranges = new int[][]{{1, 1}, {3, 9}, {17, 24}, {465868129, 988379794}};
+        int [] expectedCounts = new int[]{1,2,0, 9855};
+        for (int i = 0; i < ranges.length; i++) {
+            int count = Shorties.countSquareIntegers(ranges[i][0], ranges[i][1]);
+            Assert.assertEquals(expectedCounts[i], count);
+        }
+    }
+
+    @Test
+    public void countSquareIntegersTest_invalidInput() {
+        int count = Shorties.countSquareIntegers(4, 2);
+        Assert.assertEquals(0, count);
+    }
 }
