@@ -274,17 +274,18 @@ public class Shorties {
      * Finds if a matrix contains a particular submatrix.<br/>
      * Space complexity: <code>O(n^2)</code>.<br/>
      * Time complexity: <code>O(N^4)</code>.
+     *
      * @param matrix    The matrix to be searched.
      * @param submatrix The submatrix to be found in the matrix.
      * @return
      */
-    public static boolean containsSubmatrix(int[][]matrix, int[][]submatrix) {
+    public static boolean containsSubmatrix(int[][] matrix, int[][] submatrix) {
         boolean containsSubmatrix = false;
 
         for (int i = 0; i <= matrix.length - submatrix.length; i++) {
             for (int j = 0; j <= matrix[0].length - submatrix[0].length; j++) {
                 containsSubmatrix = true;
-                for(int x = 0; x < submatrix.length; x++) {
+                for (int x = 0; x < submatrix.length; x++) {
                     for (int y = 0; y < submatrix[0].length; y++) {
                         if (submatrix[x][y] != matrix[i + x][j + y]) {
                             containsSubmatrix = false;
