@@ -187,4 +187,123 @@ public class Shorties {
 
         return cutSticksList;
     }
+
+    /**
+     * Finds if a matrix contains a particular submatrix.<p/>
+     * Calculates submatrix sums for matrix submatrices with the same dimensions as the input submatrix. Uses the
+     * sums to find potential matches in the matrix. Then compares matrix elements to input submatrix elements to
+     * determine if there is a match.<br/>
+     * Space complexity: <code>O(n)</code>.<br/>
+     * Time complexity: <code>O(n^4)</code>
+     *
+     * @param matrix    The matrix to be searched.
+     * @param submatrix The submatrix to be found in the matrix.
+     * @return True if a match has been found.
+     */
+    public static boolean containsSubmatrixMappedSearch(int[][] matrix, int[][] submatrix) {
+        boolean isMatrixFound = false;
+
+        // matrix.height > submatrix.height
+        if (matrix.length == 0 || submatrix.length == 0 || matrix.length < submatrix.length) {
+            return false;
+        }
+        // matrix.width > submatrix.width
+        if (matrix[0].length == 0 || submatrix[0].length == 0 || matrix[0].length < submatrix[0].length) {
+            return false;
+        }
+
+        int matrixWidth = matrix[0].length;
+        int matrixHeight = matrix.length;
+
+        int submatrixWidth = submatrix[0].length;
+        int submatrixHeight = submatrix.length;
+
+        int[][] submatrixSums = new int[matrixHeight][matrixWidth];
+
+        // calculate submatrix sums for whole matrix
+        for (int j = 0; j <= matrixHeight - submatrixHeight; j++) {
+            for (int i = 0; i <= matrixWidth - submatrixWidth; i++) {
+                int submatrixSum = 0;
+                for (int y = 0; y < submatrixHeight; y++) {
+                    for (int x = 0; x < submatrixWidth; x++) {
+                        submatrixSum += matrix[y + j][x + i];
+                    }
+                }
+                submatrixSums[j][i] = submatrixSum;
+            }
+        }
+
+        // calculate submatrix sum for search submatrix
+        int submatrixSum = 0;
+        for (int j = 0; j < submatrixHeight; j++) {
+            for (int i = 0; i < submatrixWidth; i++) {
+                submatrixSum += submatrix[j][i];
+            }
+        }
+
+        // check if any matrix sums equal the search submatrix sum
+        for (int j = 0; j < matrixHeight; j++) {
+            for (int i = 0; i < matrixWidth; i++) {
+                if (submatrixSums[j][i] == submatrixSum) {
+                    isMatrixFound = true;
+                    for (int y = 0; y < submatrixHeight; y++) {
+                        for (int x = 0; x < submatrixWidth; x++) {
+                            if (submatrix[y][x] != matrix[y + j][x + i]) {
+                                isMatrixFound = false;
+                                break;
+                            }
+                        }
+                        if (!isMatrixFound) {
+                            break;
+                        }
+                    }
+                }
+                if (isMatrixFound) {
+                    break;
+                }
+            }
+            if (isMatrixFound) {
+                break;
+            }
+        }
+
+        return isMatrixFound;
+    }
+
+    /**
+     * Finds if a matrix contains a particular submatrix.<br/>
+     * Space complexity: <code>O(n^2)</code>.<br/>
+     * Time complexity: <code>O(N^4)</code>.
+     * @param matrix    The matrix to be searched.
+     * @param submatrix The submatrix to be found in the matrix.
+     * @return
+     */
+    public static boolean containsSubmatrix(int[][]matrix, int[][]submatrix) {
+        boolean containsSubmatrix = false;
+
+        for (int i = 0; i <= matrix.length - submatrix.length; i++) {
+            for (int j = 0; j <= matrix[0].length - submatrix[0].length; j++) {
+                containsSubmatrix = true;
+                for(int x = 0; x < submatrix.length; x++) {
+                    for (int y = 0; y < submatrix[0].length; y++) {
+                        if (submatrix[x][y] != matrix[i + x][j + y]) {
+                            containsSubmatrix = false;
+                            break;
+                        }
+                    }
+                    if (!containsSubmatrix) {
+                        break;
+                    }
+                }
+                if (containsSubmatrix) {
+                    break;
+                }
+            }
+            if (containsSubmatrix) {
+                break;
+            }
+        }
+
+        return containsSubmatrix;
+    }
 }
