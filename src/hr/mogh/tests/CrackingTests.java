@@ -1,6 +1,7 @@
 package hr.mogh.tests;
 
 import hr.mogh.crackingthecodinginterview.ch1.SpaceReplacer;
+import hr.mogh.crackingthecodinginterview.ch1.StringCompressor;
 import hr.mogh.crackingthecodinginterview.ch1.StringPermutationChecker;
 import hr.mogh.crackingthecodinginterview.ch1.UniqueCharacterStringSolver;
 import org.junit.Assert;
@@ -94,5 +95,20 @@ public class CrackingTests {
             }
         }
         return areEqual;
+    }
+
+    @Test
+    public void compressStringTest() {
+        String input = "aabcccccaaa";
+        String expectedOutput = "a2b1c5a3";
+        String output = StringCompressor.compressString(input);
+        Assert.assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    public void compressStringTest_producesLongerString() {
+        String input = "abcd";
+        String output = StringCompressor.compressString(input);
+        Assert.assertEquals(input, output);
     }
 }
