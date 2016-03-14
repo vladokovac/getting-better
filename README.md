@@ -15,7 +15,10 @@ Meanwhile, finding the energy to create and commit anything of substance in this
 
 #### Episode 3: Back in the saddle 
 
-14/03/2016
+Edited on: 14/03/2016. 
+
+(Happy Pi Day!)
+![Amazing Pie + Cat + Pi gif](https://tuxthedappergent.files.wordpress.com/2014/03/tumblr_n2g2zcha581qhy6c9o1_500.gif?w=625)
 
 So my last entry seems to have been more profound and prophetic than I thought. After working for a bit in C# after hours, this 
 specific pursuit of professional enhancement fell by the wayside. Work finally slowed down a bit (not for long though) and I'm ready 
