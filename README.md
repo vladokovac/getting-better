@@ -20,6 +20,6 @@ Edited on: 14/03/2016.
 ![Amazing Pie + Cat + Pi gif](https://tuxthedappergent.files.wordpress.com/2014/03/tumblr_n2g2zcha581qhy6c9o1_500.gif?w=625)
 
 So my last entry seems to have been more profound and prophetic than I thought. After working for a bit in C# after hours, this 
-specific pursuit of professional enhancement fell by the wayside. Work finally slowed down a bit (not for long though) and I'm ready 
+repository and it's specific pursuit of professional improvement fell by the wayside. Work finally slowed down a bit (not for long though) and I'm ready 
 to pick things up where I left them. Gayle Laakmann, I'm coming for you. Or rather your book of deviously useful and frustratingly 
 diverse programming challenges.
