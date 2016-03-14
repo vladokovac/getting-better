@@ -17,7 +17,6 @@ Meanwhile, finding the energy to create and commit anything of substance in this
 
 Edited on: 14/03/2016. 
 
-(Happy Pi Day!)
 ![Amazing Pie + Cat + Pi gif](https://tuxthedappergent.files.wordpress.com/2014/03/tumblr_n2g2zcha581qhy6c9o1_500.gif?w=625)
 
 So my last entry seems to have been more profound and prophetic than I thought. After working for a bit in C# after hours, this 
