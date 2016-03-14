@@ -12,3 +12,12 @@ And I'm off.
 Seems that Cracking the Coding Interview is my best path to polishing my interviewing skills. So that's my next stop. I'll try to answer all the technical questions and cover them with tests.
 
 Meanwhile, finding the energy to create and commit anything of substance in this repository after work is proving to be really difficult. I hope I can maintain any sense of regular activity.
+
+#### Episode 3: Back in the saddle 
+
+14/03/2016
+
+So my last entry seems to have been more profound and prophetic than I thought. After working for a bit in C# after hours, this 
+specific pursuit of professional enhancement fell by the wayside. Work finally slowed down a bit (not for long though) and I'm ready 
+to pick things up where I left them. Gayle Laakmann, I'm coming for you. Or rather your book of deviously useful and frustratingly 
+diverse programming challenges.
