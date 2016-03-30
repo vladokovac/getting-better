@@ -127,6 +127,22 @@ public class CrackingTests {
         Assert.assertTrue(areMatricesEqual(rotatedImage, image));
     }
 
+    @Test
+    public void zeroOutMatrix() {
+        short[][] matrix = new short[][]{{1, 2, 0, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+        short[][] expectedResult = new short[][]{{0, 0, 0, 0}, {5, 6, 0, 8}, {9, 10, 0, 12}};
+        MatrixZeroing.zeroOut(matrix);
+        Assert.assertTrue(areMatricesEqual(expectedResult, matrix));
+    }
+
+    @Test
+    public void zeroOutMatrix_overlappingZeroes() {
+        short[][] matrix = new short[][]{{1, 2, 0, 0}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+        short[][] expectedResult = new short[][]{{0, 0, 0, 0}, {5, 6, 0, 0}, {9, 10, 0, 0}};
+        MatrixZeroing.zeroOut(matrix);
+        Assert.assertTrue(areMatricesEqual(expectedResult, matrix));
+    }
+
     private boolean areMatricesEqual(short[][] expected, short[][] actual) {
         if (expected.length != actual.length || expected[0].length != actual[0].length) {
             return false;

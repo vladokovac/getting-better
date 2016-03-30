@@ -10,6 +10,13 @@ package hr.mogh.crackingthecodinginterview.ch1;
  */
 public class ImageRotator {
 
+    /**
+     * Rotates an image 90 degrees in place.<br/>
+     * Space complexity: <code>O(n)</code>.<br/>
+     * Time complexity: <code>O(n^2)</code>.
+     *
+     * @param image Image to be rotated
+     */
     public static void rotateImage(short[][] image) {
         int rows = image[0].length;
         int columns = image.length;
