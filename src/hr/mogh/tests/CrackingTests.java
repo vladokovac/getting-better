@@ -1,11 +1,10 @@
 package hr.mogh.tests;
 
-import hr.mogh.crackingthecodinginterview.ch1.SpaceReplacer;
-import hr.mogh.crackingthecodinginterview.ch1.StringCompressor;
-import hr.mogh.crackingthecodinginterview.ch1.StringPermutationChecker;
-import hr.mogh.crackingthecodinginterview.ch1.UniqueCharacterStringSolver;
+import hr.mogh.crackingthecodinginterview.ch1.*;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 /**
  * Contains tests that ensure that all solution to problems from Cracking the Coding Interview work properly.<br/>
@@ -110,5 +109,42 @@ public class CrackingTests {
         String input = "abcd";
         String output = StringCompressor.compressString(input);
         Assert.assertEquals(input, output);
+    }
+
+    @Test
+    public void rotateImageTest_3x3Matrix() {
+        short[][] image = new short[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        short[][] rotatedImage = new short[][]{{3, 6, 9}, {2, 5, 8}, {1, 4, 7}};
+        ImageRotator.rotateImage(image);
+        Assert.assertTrue(areMatricesEqual(rotatedImage, image));
+    }
+
+    @Test
+    public void rotateImageTest_4x4Matrix() {
+        short[][] image = new short[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+        short[][] rotatedImage = new short[][]{{4, 8, 12, 16}, {3, 7, 11, 15}, {2, 6, 10, 14}, {1, 5, 9, 13}};
+        ImageRotator.rotateImage(image);
+        Assert.assertTrue(areMatricesEqual(rotatedImage, image));
+    }
+
+    private boolean areMatricesEqual(short[][] expected, short[][] actual) {
+        if (expected.length != actual.length || expected[0].length != actual[0].length) {
+            return false;
+        }
+        boolean areEqual = true;
+        int rows = expected[0].length;
+        int columns = expected.length;
+        for (int i = 0; i < columns; i++) {
+            for (int j = 0; j < rows; j++) {
+                if (expected[i][j] != actual[i][j]) {
+                    areEqual = false;
+                    break;
+                }
+            }
+            if (!areEqual) {
+                break;
+            }
+        }
+        return areEqual;
     }
 }
