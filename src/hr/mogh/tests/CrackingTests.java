@@ -143,6 +143,36 @@ public class CrackingTests {
         Assert.assertTrue(areMatricesEqual(expectedResult, matrix));
     }
 
+    @Test
+    public void rotatedStringDetector_isRotated() {
+        String original = "waterbottle";
+        String rotated = "erbottlewat";
+
+        boolean isRotated = RotatedStringDetector.isRotatedString(rotated, original);
+
+        Assert.assertTrue(isRotated);
+    }
+
+    @Test
+    public void rotatedStringDetector_isNotRotated() {
+        String original = "waterbottle";
+        String rotated = "rbottlewat";
+
+        boolean isRotated = RotatedStringDetector.isRotatedString(rotated, original);
+
+        Assert.assertFalse(isRotated);
+    }
+
+    @Test
+    public void rotatedStringDetector_rotatedStringTooSmall() {
+        String original = "waterbottle";
+        String rotated = "wat";
+
+        boolean isRotated = RotatedStringDetector.isRotatedString(rotated, original);
+
+        Assert.assertFalse(isRotated);
+    }
+
     private boolean areMatricesEqual(short[][] expected, short[][] actual) {
         if (expected.length != actual.length || expected[0].length != actual[0].length) {
             return false;
