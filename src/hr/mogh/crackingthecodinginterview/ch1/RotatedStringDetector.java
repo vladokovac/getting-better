@@ -24,7 +24,7 @@ public class RotatedStringDetector {
         if (string.length() != original.length()) {
             return false;
         }
-        
+
         String doubleInput = string + string;
         return doubleInput.contains(original);
     }
