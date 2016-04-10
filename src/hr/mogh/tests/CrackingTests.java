@@ -1,10 +1,15 @@
 package hr.mogh.tests;
 
 import hr.mogh.crackingthecodinginterview.ch1.*;
+import hr.mogh.crackingthecodinginterview.ch2.ListPruner;
+import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
+import hr.mogh.datastructures.linkedlist.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Contains tests that ensure that all solution to problems from Cracking the Coding Interview work properly.<br/>
@@ -171,6 +176,16 @@ public class CrackingTests {
         boolean isRotated = RotatedStringDetector.isRotatedString(rotated, original);
 
         Assert.assertFalse(isRotated);
+    }
+
+    @Test
+    public void pruneLinkedList_withBuffer(){
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "A", "C", "D", "D", "A"));
+        DoublyLinkedList list = new DoublyLinkedList(valueList);
+        ListNode listRoot = list.getFirstNode();
+        ListPruner.pruneLinkedListWithBuffer(listRoot);
+
+        Assert.assertEquals(4, listRoot.size());
     }
 
     private boolean areMatricesEqual(short[][] expected, short[][] actual) {

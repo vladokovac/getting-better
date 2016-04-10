@@ -36,4 +36,15 @@ public class ListNode {
     public void setNodeAfter(ListNode nodeAfter) {
         this.nodeAfter = nodeAfter;
     }
+
+    public int size() {
+        int size = 1;
+
+        ListNode currentNode = this;
+        while (currentNode.nodeAfter != null) {
+            size++;
+            currentNode = currentNode.getNodeAfter();
+        }
+        return size;
+    }
 }

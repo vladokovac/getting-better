@@ -98,6 +98,14 @@ public class DoublyLinkedList {
         }
     }
 
+    public ListNode getFirstNode() {
+        return firstNode;
+    }
+
+    public ListNode getLastNode() {
+        return lastNode;
+    }
+
     @Override
     public String toString() {
         ListNode node = this.firstNode;
