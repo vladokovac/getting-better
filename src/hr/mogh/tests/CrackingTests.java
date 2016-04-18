@@ -2,6 +2,7 @@ package hr.mogh.tests;
 
 import hr.mogh.crackingthecodinginterview.ch1.*;
 import hr.mogh.crackingthecodinginterview.ch2.ListNodeFinder;
+import hr.mogh.crackingthecodinginterview.ch2.ListNodeRemover;
 import hr.mogh.crackingthecodinginterview.ch2.ListPruner;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
@@ -214,6 +215,33 @@ public class CrackingTests {
         DoublyLinkedList list = new DoublyLinkedList(valueList);
         ListNode listRoot = list.getFirstNode();
         ListNodeFinder.findKthToLastElement(4, listRoot);
+    }
+
+    @Test
+    public void removeNodeFromList(){
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "D", "E"));
+        DoublyLinkedList list = new DoublyLinkedList(valueList);
+        ListNode listNode = list.getFirstNode();
+        listNode = listNode.getNodeAfter();
+        ListNodeRemover.removeNode(listNode);
+        assertNoValueInList("B", list);
+    }
+
+    @Test
+    public void removeNodeFromListCorrectly(){
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "D", "E"));
+        DoublyLinkedList list = new DoublyLinkedList(valueList);
+        ListNode listNode = list.getFirstNode();
+        listNode = listNode.getNodeAfter();
+        ListNodeRemover.removeNode(listNode);
+        assertNoValueInList("B", list);
+    }
+
+    private void assertNoValueInList(String value, DoublyLinkedList list) {
+        ListNode listRoot = list.getFirstNode();
+        for (int i = 0; i < list.getSize(); i++) {
+            Assert.assertNotSame("B", listRoot.getValue());
+        }
     }
 
     private boolean areMatricesEqual(short[][] expected, short[][] actual) {
