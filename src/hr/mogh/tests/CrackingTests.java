@@ -1,6 +1,7 @@
 package hr.mogh.tests;
 
 import hr.mogh.crackingthecodinginterview.ch1.*;
+import hr.mogh.crackingthecodinginterview.ch2.ListNodeFinder;
 import hr.mogh.crackingthecodinginterview.ch2.ListPruner;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
@@ -196,6 +197,23 @@ public class CrackingTests {
         ListPruner.pruneLinkedList(listRoot);
 
         Assert.assertEquals(4, listRoot.size());
+    }
+
+    @Test
+    public void findKthToLastNode() {
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "A", "C", "D", "D", "A"));
+        DoublyLinkedList list = new DoublyLinkedList(valueList);
+        ListNode listRoot = list.getFirstNode();
+        ListNode foundNode = ListNodeFinder.findKthToLastElement(4, listRoot);
+        Assert.assertEquals("C", foundNode.getValue());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void findKthToLastNode_tooFewElements() {
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C"));
+        DoublyLinkedList list = new DoublyLinkedList(valueList);
+        ListNode listRoot = list.getFirstNode();
+        ListNodeFinder.findKthToLastElement(4, listRoot);
     }
 
     private boolean areMatricesEqual(short[][] expected, short[][] actual) {

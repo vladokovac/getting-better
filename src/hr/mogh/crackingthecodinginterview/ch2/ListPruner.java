@@ -8,8 +8,6 @@ import java.util.Set;
 /**
  * Solves the following problem:
  * <p/>
- * <code>Solve the following problem:
- * <p/>
  * Write code to remove duplicates from an unsorted linked list.
  * <p/>
  * How would you solve this problem if a temporary buffer is not allowed?</code><br/>
