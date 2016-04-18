@@ -188,6 +188,16 @@ public class CrackingTests {
         Assert.assertEquals(4, listRoot.size());
     }
 
+    @Test
+    public void pruneLinkedList_withoutBuffer() {
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "A", "C", "D", "D", "A"));
+        DoublyLinkedList list = new DoublyLinkedList(valueList);
+        ListNode listRoot = list.getFirstNode();
+        ListPruner.pruneLinkedList(listRoot);
+
+        Assert.assertEquals(4, listRoot.size());
+    }
+
     private boolean areMatricesEqual(short[][] expected, short[][] actual) {
         if (expected.length != actual.length || expected[0].length != actual[0].length) {
             return false;

@@ -32,20 +32,40 @@ public class ListPruner {
             if (!valuesInList.contains(node.getValue())) {
                 valuesInList.add(node.getValue());
             } else {
-                ListNode nodeBefore = node.getNodeBefore();
-                if (nodeBefore != null) {
-                    nodeBefore.setNodeAfter(node.getNodeAfter());
-                }
-                ListNode nodeAfter = node.getNodeAfter();
-                if (nodeAfter != null) {
-                    nodeAfter.setNodeBefore(nodeBefore);
-                }
+                removeNode(node);
             }
             node = node.getNodeAfter();
         }
     }
 
+    /**
+     * Removes duplicate values from a linked list. Uses a forward pointer to check for repeating values.<br/>
+     * Space complexity: <code>O(n)</code><br/>
+     * Time complexity: <code>O(n^2)</code><br/>
+     * @param rootNode The root of the list.
+     */
     public static void pruneLinkedList(ListNode rootNode) {
+        ListNode node = rootNode;
+        while (node != null) {
+            ListNode forwardNode = node.getNodeAfter();
+            while (forwardNode != null) {
+                if (forwardNode.getValue().equals(node.getValue())) {
+                    removeNode(forwardNode);
+                }
+                forwardNode = forwardNode.getNodeAfter();
+            }
+            node = node.getNodeAfter();
+        }
+    }
 
+    private static void removeNode(ListNode node) {
+        ListNode nodeBefore = node.getNodeBefore();
+        if (nodeBefore != null) {
+            nodeBefore.setNodeAfter(node.getNodeAfter());
+        }
+        ListNode nodeAfter = node.getNodeAfter();
+        if (nodeAfter != null) {
+            nodeAfter.setNodeBefore(nodeBefore);
+        }
     }
 }
