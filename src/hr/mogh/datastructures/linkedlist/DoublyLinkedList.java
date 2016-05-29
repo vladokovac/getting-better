@@ -11,10 +11,29 @@ public class DoublyLinkedList {
     private ListNode lastNode;
     private int size;
 
+    public DoublyLinkedList(Object rootValue) {
+        this.add(rootValue);
+    }
+
     public DoublyLinkedList(List<Object> listData) {
         for (Object data : listData) {
             this.add(data);
         }
+    }
+
+    public DoublyLinkedList(ListNode firstNode) {
+        this.firstNode = firstNode;
+        this.firstNode.setNodeBefore(null);
+
+        ListNode node = firstNode;
+        int i = 1;
+        while (node.getNodeAfter() != null) {
+            node = node.getNodeAfter();
+            i++;
+        }
+        this.lastNode = node;
+        this.lastNode.setNodeAfter(null);
+        this.size = i;
     }
 
     public int getSize() {

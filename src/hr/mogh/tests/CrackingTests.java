@@ -1,6 +1,7 @@
 package hr.mogh.tests;
 
 import hr.mogh.crackingthecodinginterview.ch1.*;
+import hr.mogh.crackingthecodinginterview.ch2.LinkedListPartitioner;
 import hr.mogh.crackingthecodinginterview.ch2.ListNodeFinder;
 import hr.mogh.crackingthecodinginterview.ch2.ListNodeRemover;
 import hr.mogh.crackingthecodinginterview.ch2.ListPruner;
@@ -181,8 +182,8 @@ public class CrackingTests {
     }
 
     @Test
-    public void pruneLinkedList_withBuffer(){
-        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "A", "C", "D", "D", "A"));
+    public void pruneLinkedList_withBuffer() {
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object) "A", "B", "C", "A", "C", "D", "D", "A"));
         DoublyLinkedList list = new DoublyLinkedList(valueList);
         ListNode listRoot = list.getFirstNode();
         ListPruner.pruneLinkedListWithBuffer(listRoot);
@@ -192,7 +193,7 @@ public class CrackingTests {
 
     @Test
     public void pruneLinkedList_withoutBuffer() {
-        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "A", "C", "D", "D", "A"));
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object) "A", "B", "C", "A", "C", "D", "D", "A"));
         DoublyLinkedList list = new DoublyLinkedList(valueList);
         ListNode listRoot = list.getFirstNode();
         ListPruner.pruneLinkedList(listRoot);
@@ -202,7 +203,7 @@ public class CrackingTests {
 
     @Test
     public void findKthToLastNode() {
-        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "A", "C", "D", "D", "A"));
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object) "A", "B", "C", "A", "C", "D", "D", "A"));
         DoublyLinkedList list = new DoublyLinkedList(valueList);
         ListNode listRoot = list.getFirstNode();
         ListNode foundNode = ListNodeFinder.findKthToLastElement(4, listRoot);
@@ -211,15 +212,15 @@ public class CrackingTests {
 
     @Test(expected = IllegalArgumentException.class)
     public void findKthToLastNode_tooFewElements() {
-        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C"));
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object) "A", "B", "C"));
         DoublyLinkedList list = new DoublyLinkedList(valueList);
         ListNode listRoot = list.getFirstNode();
         ListNodeFinder.findKthToLastElement(4, listRoot);
     }
 
     @Test
-    public void removeNodeFromList(){
-        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "D", "E"));
+    public void removeNodeFromList() {
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object) "A", "B", "C", "D", "E"));
         DoublyLinkedList list = new DoublyLinkedList(valueList);
         ListNode listNode = list.getFirstNode();
         listNode = listNode.getNodeAfter();
@@ -228,8 +229,8 @@ public class CrackingTests {
     }
 
     @Test
-    public void removeNodeFromListCorrectly(){
-        List<Object> valueList = new ArrayList<>(Arrays.asList((Object)"A", "B", "C", "D", "E"));
+    public void removeNodeFromListCorrectly() {
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object) "A", "B", "C", "D", "E"));
         DoublyLinkedList list = new DoublyLinkedList(valueList);
         ListNode listNode = list.getFirstNode();
         listNode = listNode.getNodeAfter();
@@ -237,11 +238,61 @@ public class CrackingTests {
         assertNoValueInList("B", list);
     }
 
-    private void assertNoValueInList(String value, DoublyLinkedList list) {
-        ListNode listRoot = list.getFirstNode();
-        for (int i = 0; i < list.getSize(); i++) {
-            Assert.assertNotSame("B", listRoot.getValue());
+    @Test
+    public void partitionLinkedListAroundValue() {
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object) 1, 33, 6, 3, 7, 4, 11, 5, 4, 5, 6, 2));
+        int value = 5;
+        DoublyLinkedList list = new DoublyLinkedList(valueList);
+        DoublyLinkedList partitionedList = LinkedListPartitioner.partitionList(list, value);
+
+        assertListPartitionedCorrectly(partitionedList, value);
+    }
+
+    @Test
+    public void partitionLinkedListAroundValue_allValuesGreater() {
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object) 33, 6, 3, 7, 4, 11, 5, 4, 5, 6, 2));
+        int value = 2;
+        DoublyLinkedList list = new DoublyLinkedList(valueList);
+        DoublyLinkedList partitionedList = LinkedListPartitioner.partitionList(list, value);
+
+        assertListPartitionedCorrectly(partitionedList, value);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void partitionLinkedListAroundValue_pivotDoesntExist() {
+        List<Object> valueList = new ArrayList<>(Arrays.asList((Object) 33, 6, 3, 7, 4, 11, 5, 4, 5, 6, 2));
+        int value = 22;
+        DoublyLinkedList list = new DoublyLinkedList(valueList);
+        LinkedListPartitioner.partitionList(list, value);
+    }
+
+    private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
+        ListNode node = partitionedList.getFirstNode();
+        ListNode pivotNode = node;
+        while (pivotNode.getNodeAfter() != null && (int) pivotNode.getNodeAfter().getValue() <= pivotValue) {
+            pivotNode = pivotNode.getNodeAfter();
         }
+
+        boolean hasPassedPivot = false;
+        do {
+            if (!hasPassedPivot) {
+                Assert.assertTrue(pivotValue >= (int) node.getValue());
+            } else {
+                Assert.assertTrue(pivotValue < (int) node.getValue());
+            }
+            if (node == pivotNode) {
+                hasPassedPivot = true;
+            }
+            node = node.getNodeAfter();
+        } while (node != null);
+    }
+
+    private void assertNoValueInList(String value, DoublyLinkedList list) {
+        ListNode node = list.getFirstNode();
+        do {
+            Assert.assertNotSame(value, node.getValue());
+            node = node.getNodeAfter();
+        } while (node.getNodeAfter() != null);
     }
 
     private boolean areMatricesEqual(short[][] expected, short[][] actual) {
