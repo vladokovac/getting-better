@@ -1,10 +1,7 @@
 package hr.mogh.tests;
 
 import hr.mogh.crackingthecodinginterview.ch1.*;
-import hr.mogh.crackingthecodinginterview.ch2.LinkedListPartitioner;
-import hr.mogh.crackingthecodinginterview.ch2.ListNodeFinder;
-import hr.mogh.crackingthecodinginterview.ch2.ListNodeRemover;
-import hr.mogh.crackingthecodinginterview.ch2.ListPruner;
+import hr.mogh.crackingthecodinginterview.ch2.*;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
 import org.junit.Assert;
@@ -264,6 +261,78 @@ public class CrackingTests {
         int value = 22;
         DoublyLinkedList list = new DoublyLinkedList(valueList);
         LinkedListPartitioner.partitionList(list, value);
+    }
+
+    @Test
+    public void sumReverseLists() {
+        List<Object> list1 = new ArrayList<>(Arrays.asList((Object) 7, 1, 6));
+        List<Object> list2 = new ArrayList<>(Arrays.asList((Object) 5, 9, 2));
+        List<Object> listExpected = new ArrayList<>(Arrays.asList((Object) 2, 1, 9));
+        DoublyLinkedList linkedListExpected = new DoublyLinkedList(listExpected);
+        DoublyLinkedList linkedList1 = new DoublyLinkedList(list1);
+        DoublyLinkedList linkedList2 = new DoublyLinkedList(list2);
+        DoublyLinkedList summedList = ListAdditionImplementations.sumReverse(linkedList1, linkedList2);
+        Assert.assertEquals(linkedListExpected, summedList);
+    }
+
+    @Test
+    public void sumReverseLists_extraCarryOverNode() {
+        List<Object> list1 = new ArrayList<>(Arrays.asList((Object) 9, 9, 9));
+        List<Object> list2 = new ArrayList<>(Arrays.asList((Object) 5, 6, 7));
+        List<Object> listExpected = new ArrayList<>(Arrays.asList((Object) 4, 6, 7, 1));
+        DoublyLinkedList linkedListExpected = new DoublyLinkedList(listExpected);
+        DoublyLinkedList linkedList1 = new DoublyLinkedList(list1);
+        DoublyLinkedList linkedList2 = new DoublyLinkedList(list2);
+        DoublyLinkedList summedList = ListAdditionImplementations.sumReverse(linkedList1, linkedList2);
+        Assert.assertEquals(linkedListExpected, summedList);
+    }
+
+    @Test
+    public void sumReverseLists_oneShorterList() {
+        List<Object> list1 = new ArrayList<>(Arrays.asList((Object) 9, 9, 9));
+        List<Object> list2 = new ArrayList<>(Arrays.asList((Object) 6, 7));
+        List<Object> listExpected = new ArrayList<>(Arrays.asList((Object) 5, 7, 0, 1));
+        DoublyLinkedList linkedListExpected = new DoublyLinkedList(listExpected);
+        DoublyLinkedList linkedList1 = new DoublyLinkedList(list1);
+        DoublyLinkedList linkedList2 = new DoublyLinkedList(list2);
+        DoublyLinkedList summedList = ListAdditionImplementations.sumReverse(linkedList1, linkedList2);
+        Assert.assertEquals(linkedListExpected, summedList);
+    }
+
+    @Test
+    public void sumLists() {
+        List<Object> list1 = new ArrayList<>(Arrays.asList((Object) 6, 1, 7));
+        List<Object> list2 = new ArrayList<>(Arrays.asList((Object) 2, 9, 5));
+        List<Object> listExpected = new ArrayList<>(Arrays.asList((Object) 9, 1, 2));
+        DoublyLinkedList linkedListExpected = new DoublyLinkedList(listExpected);
+        DoublyLinkedList linkedList1 = new DoublyLinkedList(list1);
+        DoublyLinkedList linkedList2 = new DoublyLinkedList(list2);
+        DoublyLinkedList summedList = ListAdditionImplementations.sum(linkedList1, linkedList2);
+        Assert.assertEquals(linkedListExpected, summedList);
+    }
+
+    @Test
+    public void sumLists_extraCarryOverNode() {
+        List<Object> list1 = new ArrayList<>(Arrays.asList((Object) 9, 9, 9));
+        List<Object> list2 = new ArrayList<>(Arrays.asList((Object) 7, 6, 5));
+        List<Object> listExpected = new ArrayList<>(Arrays.asList((Object) 1, 7, 6, 4));
+        DoublyLinkedList linkedListExpected = new DoublyLinkedList(listExpected);
+        DoublyLinkedList linkedList1 = new DoublyLinkedList(list1);
+        DoublyLinkedList linkedList2 = new DoublyLinkedList(list2);
+        DoublyLinkedList summedList = ListAdditionImplementations.sum(linkedList1, linkedList2);
+        Assert.assertEquals(linkedListExpected, summedList);
+    }
+
+    @Test
+    public void sumLists_oneShorterList() {
+        List<Object> list1 = new ArrayList<>(Arrays.asList((Object) 9, 9, 9));
+        List<Object> list2 = new ArrayList<>(Arrays.asList((Object) 7, 6));
+        List<Object> listExpected = new ArrayList<>(Arrays.asList((Object) 1, 0, 7, 5));
+        DoublyLinkedList linkedListExpected = new DoublyLinkedList(listExpected);
+        DoublyLinkedList linkedList1 = new DoublyLinkedList(list1);
+        DoublyLinkedList linkedList2 = new DoublyLinkedList(list2);
+        DoublyLinkedList summedList = ListAdditionImplementations.sum(linkedList1, linkedList2);
+        Assert.assertEquals(linkedListExpected, summedList);
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {

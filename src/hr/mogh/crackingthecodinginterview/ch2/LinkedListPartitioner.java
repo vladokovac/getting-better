@@ -18,7 +18,7 @@ public class LinkedListPartitioner {
 
     /**
      * Partitions a doubly linked list around a pivot value. After partitioning, all smaller and equal nodes are to
-     * the left of the node with the pivot value and all greater nodes are to the right of the pivot node.
+     * the left of the node with the pivot value and all greater nodes are to the right of the pivot node.<br/>
      * Space complexity: <code>O(n)</code><br/>
      * Time complexity: <code>O(n)</code><br/>
      *

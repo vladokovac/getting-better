@@ -136,4 +136,42 @@ public class DoublyLinkedList {
         String output = stringBuilder.toString();
         return output.substring(0, output.length() - 5);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        DoublyLinkedList that = (DoublyLinkedList) o;
+
+        if (size != that.size) {
+            return false;
+        }
+
+        boolean isEqual = true;
+
+        ListNode thisNode = firstNode;
+        ListNode thatNode = that.firstNode;
+
+        while(thisNode != null && thatNode != null) {
+            if (!(thisNode.getValue() == thatNode.getValue())){
+                isEqual = false;
+                break;
+            }
+            thisNode = thisNode.getNodeAfter();
+            thatNode = thatNode.getNodeAfter();
+        }
+
+        return isEqual;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstNode != null ? firstNode.hashCode() : 0;
+        result = 31 * result + size;
+        return result;
+    }
 }
