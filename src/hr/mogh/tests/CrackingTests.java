@@ -12,6 +12,17 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ *
+ *
+ * Solve the following problem:
+
+ Given a circular linked list, implement an algorithm which returns the node at the beginning of the loop.
+
+ DEFINITION: Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node, so as to make a loop in the linked list.
+
+ EXAMPLE
+ Input: A -> B -> C -> D -> E -> C [the same C as earlier]
+ Output: C
  * Contains tests that ensure that all solution to problems from Cracking the Coding Interview work properly.<br/>
  * Created by vlado on 6.1.2016.
  */
@@ -83,6 +94,25 @@ public class CrackingTests {
         char[] expectedOutput = {'%', '2', '0', 'a'};
         char[] output = SpaceReplacer.replaceSpaces(input);
         Assert.assertTrue(areEqual(expectedOutput, output));
+    }
+
+    @Test
+    public void detectCircularLinkedList_noLoop() {
+        Character[] characters = {'A', 'B', 'C', 'D', 'E', 'F'};
+        DoublyLinkedList linkedList = new DoublyLinkedList(Arrays.asList(characters));
+        Assert.assertNull(CircularLinkedListDetector.findStartOfLoop(linkedList));
+    }
+
+    @Test
+    public void detectCircularLinkedList_withLoop() {
+        Character[] characters = {'A', 'B', 'C', 'D', 'E', 'F'};
+        DoublyLinkedList linkedList = new DoublyLinkedList((List)Arrays.asList(characters));
+        ListNode someNode = linkedList.getLastNode().getNodeBefore().getNodeBefore();
+        ListNode newNode = new ListNode('G');
+        newNode.setNodeAfter(someNode);
+        linkedList.getLastNode().setNodeAfter(newNode);
+        ListNode loopStart = CircularLinkedListDetector.findStartOfLoop(linkedList);
+        Assert.assertEquals(someNode, loopStart);
     }
 
     public boolean areEqual(char[] first, char[] second) {
