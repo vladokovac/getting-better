@@ -7,7 +7,7 @@ package hr.mogh.datastructures.sorting;
 public class SortingAlgorithms {
 
     /**
-     * Standart quicksort implementation.<br/>
+     * Standard quicksort implementation.<br/>
      * Space complexity:<code>O(log n).</code><br/>
      * Time complexity:<code>O(n log n).</code>
      *
