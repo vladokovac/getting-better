@@ -30,7 +30,7 @@ public class CrackingTests {
 
     @Test
     public void uniqueCharacterTest_uniqueCharacters() {
-        String input = "s0dleog7Šðž]÷¤23bm<";
+        String input = "s0dleog7+x23bm<";
         boolean allCharactersUnique = UniqueCharacterStringSolver.hasAllUniqueCharacters(input);
         Assert.assertTrue(allCharactersUnique);
     }
@@ -44,7 +44,7 @@ public class CrackingTests {
 
     @Test
     public void uniqueCharactersNoExtraDataStructuresTest_uniqueCharacters() {
-        String input = "s0dleog7Šðž]÷¤23bm<";
+        String input = "s0dleog7+x23bm<";
         boolean allCharactersUnique = UniqueCharacterStringSolver.hasAllUniqueCharactersNoExtraDataStructures(input);
         Assert.assertTrue(allCharactersUnique);
     }
@@ -113,6 +113,27 @@ public class CrackingTests {
         linkedList.getLastNode().setNodeAfter(newNode);
         ListNode loopStart = CircularLinkedListDetector.findStartOfLoop(linkedList);
         Assert.assertEquals(someNode, loopStart);
+    }
+
+    @Test
+    public void isLinkedListAPalindrome_oddPalindrome(){
+        Character[] characters = {'A', 'B', 'C', 'B', 'A'};
+        DoublyLinkedList linkedList = new DoublyLinkedList((List)Arrays.asList(characters));
+        Assert.assertTrue(PalindromeListDetector.isPalindrome(linkedList));
+    }
+
+    @Test
+    public void isLinkedListAPalindrome_evenPalindrome(){
+        Character[] characters = {'A', 'B', 'C', 'C', 'B', 'A'};
+        DoublyLinkedList linkedList = new DoublyLinkedList((List)Arrays.asList(characters));
+        Assert.assertTrue(PalindromeListDetector.isPalindrome(linkedList));
+    }
+
+    @Test
+    public void isLinkedListAPalindrome_notAPalindrome(){
+        Character[] characters = {'A', 'B', 'C', 'C'};
+        DoublyLinkedList linkedList = new DoublyLinkedList((List)Arrays.asList(characters));
+        Assert.assertFalse(PalindromeListDetector.isPalindrome(linkedList));
     }
 
     public boolean areEqual(char[] first, char[] second) {
