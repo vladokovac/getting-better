@@ -1,5 +1,7 @@
-package hr.mogh.datastructures.queue;
+package hr.mogh.tests;
 
+import hr.mogh.datastructures.queue.SuperQueue;
+import hr.mogh.datastructures.queue.SuperStack;
 import org.junit.Assert;
 import org.junit.Test;
 
