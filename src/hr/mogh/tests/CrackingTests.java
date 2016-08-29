@@ -2,6 +2,7 @@ package hr.mogh.tests;
 
 import hr.mogh.crackingthecodinginterview.ch1.*;
 import hr.mogh.crackingthecodinginterview.ch2.*;
+import hr.mogh.crackingthecodinginterview.ch3.TriStack;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
 import org.junit.Assert;
@@ -95,7 +96,7 @@ public class CrackingTests {
     @Test
     public void detectCircularLinkedList_withLoop() {
         Character[] characters = {'A', 'B', 'C', 'D', 'E', 'F'};
-        DoublyLinkedList linkedList = new DoublyLinkedList((List)Arrays.asList(characters));
+        DoublyLinkedList linkedList = new DoublyLinkedList((List) Arrays.asList(characters));
         ListNode someNode = linkedList.getLastNode().getNodeBefore().getNodeBefore();
         ListNode newNode = new ListNode('G');
         newNode.setNodeAfter(someNode);
@@ -105,23 +106,23 @@ public class CrackingTests {
     }
 
     @Test
-    public void isLinkedListAPalindrome_oddPalindrome(){
+    public void isLinkedListAPalindrome_oddPalindrome() {
         Character[] characters = {'A', 'B', 'C', 'B', 'A'};
-        DoublyLinkedList linkedList = new DoublyLinkedList((List)Arrays.asList(characters));
+        DoublyLinkedList linkedList = new DoublyLinkedList((List) Arrays.asList(characters));
         Assert.assertTrue(PalindromeListDetector.isPalindrome(linkedList));
     }
 
     @Test
-    public void isLinkedListAPalindrome_evenPalindrome(){
+    public void isLinkedListAPalindrome_evenPalindrome() {
         Character[] characters = {'A', 'B', 'C', 'C', 'B', 'A'};
-        DoublyLinkedList linkedList = new DoublyLinkedList((List)Arrays.asList(characters));
+        DoublyLinkedList linkedList = new DoublyLinkedList((List) Arrays.asList(characters));
         Assert.assertTrue(PalindromeListDetector.isPalindrome(linkedList));
     }
 
     @Test
-    public void isLinkedListAPalindrome_notAPalindrome(){
+    public void isLinkedListAPalindrome_notAPalindrome() {
         Character[] characters = {'A', 'B', 'C', 'C'};
-        DoublyLinkedList linkedList = new DoublyLinkedList((List)Arrays.asList(characters));
+        DoublyLinkedList linkedList = new DoublyLinkedList((List) Arrays.asList(characters));
         Assert.assertFalse(PalindromeListDetector.isPalindrome(linkedList));
     }
 
@@ -373,6 +374,47 @@ public class CrackingTests {
         DoublyLinkedList linkedList2 = new DoublyLinkedList(list2);
         DoublyLinkedList summedList = ListAdditionImplementations.sum(linkedList1, linkedList2);
         Assert.assertEquals(linkedListExpected, summedList);
+    }
+
+    @Test
+    public void triStack_pushPop() {
+        TriStack triStack = new TriStack(9);
+        triStack.push(1, 1);
+        triStack.push(2, 2);
+        triStack.push(3, 3);
+
+        Assert.assertEquals(1, triStack.pop(1));
+        Assert.assertEquals(2, triStack.pop(2));
+        Assert.assertEquals(3, triStack.pop(3));
+    }
+
+    @Test
+    public void triStack_pushWhenFull() {
+        TriStack triStack = new TriStack(9);
+        Assert.assertTrue(triStack.push(1, 2));
+        Assert.assertTrue(triStack.push(2, 2));
+        Assert.assertTrue(triStack.push(3, 2));
+        Assert.assertFalse(triStack.push(4, 2));
+    }
+
+    @Test
+    public void triStack_popWhenEmpty() {
+        TriStack triStack = new TriStack(9);
+        Assert.assertNull(triStack.pop(1));
+    }
+
+    @Test
+    public void triStack_checkBorders() {
+        TriStack triStack = new TriStack(9);
+        triStack.push(1, 2);
+        triStack.push(2, 2);
+        triStack.push(3, 2);
+        triStack.push(4, 3);
+        Assert.assertEquals(4, triStack.pop(3));
+        Assert.assertNull(triStack.pop(3));
+        Assert.assertEquals(3, triStack.pop(2));
+        Assert.assertEquals(2, triStack.pop(2));
+        Assert.assertEquals(1, triStack.pop(2));
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
