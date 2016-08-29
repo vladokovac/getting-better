@@ -1,6 +1,8 @@
 package hr.mogh.crackingthecodinginterview.ch3;
 
 /**
+ * Solves the following problem:<p/>
+ * <code>Describe how you could use a single array to implement three stacks.</code><p/>
  * Created by vlado on 29.8.2016.
  */
 public class TriStack {
@@ -14,6 +16,11 @@ public class TriStack {
     private Integer stack2Top;
     private Integer stack3Top;
 
+    /**
+     * A class with three stacks. Implemented using one array and indices.
+     * @param capacity Total combined capacity of the stacks.
+     * @throws IllegalArgumentException Thrown when stacks indices other than 1, 2 or 3 are used.
+     */
     public TriStack(int capacity) throws IllegalArgumentException {
 
         if (capacity < 3) {
@@ -30,6 +37,13 @@ public class TriStack {
         stack3Top = stack2MaxIndex;
     }
 
+    /**
+     * A push implementation for the TriStack.
+     * @param value The value to be stored.
+     * @param stackIndex The index of the stack that will store the value.
+     * @return True if storing succeeded.
+     * @throws IllegalArgumentException
+     */
     public boolean push(Object value, int stackIndex) throws IllegalArgumentException {
         boolean isSuccessful = false;
         switch (stackIndex) {
@@ -58,6 +72,11 @@ public class TriStack {
         return isSuccessful;
     }
 
+    /**
+     * A push implementation for the TriStack.
+     * @param stackIndex The index of the stack that the value is popped from.
+     * @return The popped value, null if stack is empty.
+     */
     public Object pop(int stackIndex) {
         Object value = null;
 
