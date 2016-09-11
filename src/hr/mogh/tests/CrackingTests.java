@@ -2,6 +2,8 @@ package hr.mogh.tests;
 
 import hr.mogh.crackingthecodinginterview.ch1.*;
 import hr.mogh.crackingthecodinginterview.ch2.*;
+import hr.mogh.crackingthecodinginterview.ch3.FasterMinStack;
+import hr.mogh.crackingthecodinginterview.ch3.MinStack;
 import hr.mogh.crackingthecodinginterview.ch3.TriStack;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
@@ -415,6 +417,62 @@ public class CrackingTests {
         Assert.assertEquals(3, triStack.pop(2));
         Assert.assertEquals(2, triStack.pop(2));
         Assert.assertEquals(1, triStack.pop(2));
+    }
+
+    @Test
+    public void minStack_popPush() {
+        MinStack minStack = new MinStack();
+
+        int[] inputs = new int[]{3, 2, 1, -1};
+
+        for (int input : inputs) {
+            minStack.push(input);
+        }
+        for (int i = inputs.length - 1; i <= 0; i--) {
+            Assert.assertEquals(inputs[i], (int) minStack.pop());
+        }
+    }
+
+
+    @Test
+    public void fasterMinStack_minValue() {
+        int[] inputs = new int[]{3, 1, 2, -1};
+        int[] expectedMins = new int[]{3, 1, 1, -1};
+
+        FasterMinStack fasterMinStack = new FasterMinStack();
+
+        for (int i = 0; i < inputs.length; i++) {
+            fasterMinStack.push(inputs[i]);
+            Assert.assertEquals(expectedMins[i], fasterMinStack.getMin());
+        }
+    }
+
+    @Test
+    public void fasterStack_popPush() {
+        FasterMinStack fasterMinStack = new FasterMinStack();
+
+        int[] inputs = new int[]{3, 2, 1, -1};
+
+        for (int input : inputs) {
+            fasterMinStack.push(input);
+        }
+        for (int i = inputs.length - 1; i <= 0; i--) {
+            Assert.assertEquals(inputs[i], fasterMinStack.pop());
+        }
+    }
+
+
+    @Test
+    public void minStack_minValue() {
+        int[] inputs = new int[]{3, 1, 2, -1};
+        int[] expectedMins = new int[]{3, 1, 1, -1};
+
+        MinStack minStack = new MinStack();
+
+        for (int i = 0; i < inputs.length; i++) {
+            minStack.push(inputs[i]);
+            Assert.assertEquals(expectedMins[i], minStack.getMin());
+        }
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
