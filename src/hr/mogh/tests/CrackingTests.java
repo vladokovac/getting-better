@@ -4,6 +4,7 @@ import hr.mogh.crackingthecodinginterview.ch1.*;
 import hr.mogh.crackingthecodinginterview.ch2.*;
 import hr.mogh.crackingthecodinginterview.ch3.FasterMinStack;
 import hr.mogh.crackingthecodinginterview.ch3.MinStack;
+import hr.mogh.crackingthecodinginterview.ch3.SetOfStacks;
 import hr.mogh.crackingthecodinginterview.ch3.TriStack;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
@@ -428,7 +429,7 @@ public class CrackingTests {
         for (int input : inputs) {
             minStack.push(input);
         }
-        for (int i = inputs.length - 1; i <= 0; i--) {
+        for (int i = inputs.length - 1; i >= 0; i--) {
             Assert.assertEquals(inputs[i], (int) minStack.pop());
         }
     }
@@ -456,7 +457,7 @@ public class CrackingTests {
         for (int input : inputs) {
             fasterMinStack.push(input);
         }
-        for (int i = inputs.length - 1; i <= 0; i--) {
+        for (int i = inputs.length - 1; i >= 0; i--) {
             Assert.assertEquals(inputs[i], fasterMinStack.pop());
         }
     }
@@ -473,6 +474,52 @@ public class CrackingTests {
             minStack.push(inputs[i]);
             Assert.assertEquals(expectedMins[i], minStack.getMin());
         }
+    }
+
+    @Test
+    public void setOfStacks_pushPopSingleStack() {
+        Integer[] inputs = new Integer[]{1, 2, 3};
+        SetOfStacks setOfStacks = new SetOfStacks(10);
+
+        for (int input : inputs) {
+            setOfStacks.push(input);
+        }
+
+        for (int i = inputs.length - 1; i >= 0; i--) {
+            Assert.assertEquals(inputs[i], setOfStacks.pop());
+        }
+    }
+
+    @Test
+    public void setOfStacks_pushPopMultipleStacks() {
+        Integer[] inputs = new Integer[]{1, 2, 3};
+        SetOfStacks setOfStacks = new SetOfStacks(1);
+
+        for (int input : inputs) {
+            setOfStacks.push(input);
+        }
+
+        for (int i = inputs.length - 1; i >= 0; i--) {
+            Assert.assertEquals(inputs[i], setOfStacks.pop());
+        }
+    }
+
+    @Test
+    public void setOfStacks_popWhenEmptySingleStack() {
+        SetOfStacks setOfStacks = new SetOfStacks(1);
+        setOfStacks.push(1);
+        Assert.assertEquals(1, setOfStacks.pop());
+        Assert.assertNull(setOfStacks.pop());
+    }
+
+    @Test
+    public void setOfStacks_popWhenEmptyMultipleStacks() {
+        SetOfStacks setOfStacks = new SetOfStacks(1);
+        setOfStacks.push(1);
+        setOfStacks.push(2);
+        Assert.assertEquals(2, setOfStacks.pop());
+        Assert.assertEquals(1, setOfStacks.pop());
+        Assert.assertNull(setOfStacks.pop());
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
