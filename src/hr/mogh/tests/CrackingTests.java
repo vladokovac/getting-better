@@ -522,6 +522,30 @@ public class CrackingTests {
         Assert.assertNull(setOfStacks.pop());
     }
 
+    @Test
+    public void setOfStacks_popAt() {
+        Integer[] inputs = new Integer[]{1, 2, 3};
+        SetOfStacks setOfStacks = new SetOfStacks(1);
+
+        for (int input : inputs) {
+            setOfStacks.push(input);
+        }
+        Assert.assertEquals(1, setOfStacks.popAt(0));
+        Assert.assertEquals(2, setOfStacks.popAt(0));
+        Assert.assertEquals(3, setOfStacks.popAt(0));
+        Assert.assertNull(setOfStacks.popAt(0));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void setOfStacks_popAtIndexOutOfBounds() {
+        Integer[] inputs = new Integer[]{1, 2, 3};
+        SetOfStacks setOfStacks = new SetOfStacks(1);
+        for (int input : inputs) {
+            setOfStacks.push(input);
+        }
+        Assert.assertEquals(1, setOfStacks.popAt(3));
+    }
+
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
         ListNode node = partitionedList.getFirstNode();
         ListNode pivotNode = node;
