@@ -2,10 +2,7 @@ package hr.mogh.tests;
 
 import hr.mogh.crackingthecodinginterview.ch1.*;
 import hr.mogh.crackingthecodinginterview.ch2.*;
-import hr.mogh.crackingthecodinginterview.ch3.FasterMinStack;
-import hr.mogh.crackingthecodinginterview.ch3.MinStack;
-import hr.mogh.crackingthecodinginterview.ch3.SetOfStacks;
-import hr.mogh.crackingthecodinginterview.ch3.TriStack;
+import hr.mogh.crackingthecodinginterview.ch3.*;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
 import org.junit.Assert;
@@ -14,6 +11,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Contains tests that ensure that all solution to problems from Cracking the Coding Interview work properly.<br/>
@@ -544,6 +542,23 @@ public class CrackingTests {
             setOfStacks.push(input);
         }
         Assert.assertEquals(1, setOfStacks.popAt(3));
+    }
+
+    @Test
+    public void hanoiSolver_solve() {
+        int totalDisks = 5;
+        Stack solvedStack = HanoiTowerSolver.solve(totalDisks);
+        Assert.assertEquals(totalDisks, solvedStack.size());
+        for (int i = 0; i < totalDisks; i++) {
+            Assert.assertEquals(i, (int)solvedStack.pop());
+        }
+    }
+
+    @Test
+    public void hanoiSolver_emptyStack() {
+        int totalDisks = 0;
+        Stack solvedStack = HanoiTowerSolver.solve(totalDisks);
+        Assert.assertNull(solvedStack);
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
