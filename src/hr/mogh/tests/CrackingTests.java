@@ -561,6 +561,34 @@ public class CrackingTests {
         Assert.assertNull(solvedStack);
     }
 
+    @Test
+    public void myQueue_enqueueDequeue() {
+        MyQueue myQueue = new MyQueue();
+        Integer[] inputs = new Integer[]{1, 2, 3};
+        myQueue.enqueue(inputs);
+
+        for (int input: inputs) {
+            Assert.assertEquals(input, myQueue.dequeue());
+        }
+    }
+
+    @Test
+    public void myQueue_dequeueWhenEmpty() {
+        MyQueue myQueue = new MyQueue();
+        Assert.assertNull(myQueue.dequeue());
+    }
+
+    @Test
+    public void myQueue_enqueueDequeueSequence() {
+        MyQueue myQueue = new MyQueue();
+        Integer[] inputs = new Integer[]{1, 2, 3};
+        myQueue.enqueue(inputs);
+
+        Assert.assertEquals(inputs[0], myQueue.dequeue());
+        myQueue.enqueue(4);
+        Assert.assertEquals(inputs[1], myQueue.dequeue());
+    }
+
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
         ListNode node = partitionedList.getFirstNode();
         ListNode pivotNode = node;
