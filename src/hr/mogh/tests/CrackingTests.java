@@ -550,7 +550,7 @@ public class CrackingTests {
         Stack solvedStack = HanoiTowerSolver.solve(totalDisks);
         Assert.assertEquals(totalDisks, solvedStack.size());
         for (int i = 0; i < totalDisks; i++) {
-            Assert.assertEquals(i, (int)solvedStack.pop());
+            Assert.assertEquals(i, (int) solvedStack.pop());
         }
     }
 
@@ -567,7 +567,7 @@ public class CrackingTests {
         Integer[] inputs = new Integer[]{1, 2, 3};
         myQueue.enqueue(inputs);
 
-        for (int input: inputs) {
+        for (int input : inputs) {
             Assert.assertEquals(input, myQueue.dequeue());
         }
     }
@@ -587,6 +587,41 @@ public class CrackingTests {
         Assert.assertEquals(inputs[0], myQueue.dequeue());
         myQueue.enqueue(4);
         Assert.assertEquals(inputs[1], myQueue.dequeue());
+    }
+
+    @Test
+    public void sortedStack_pushPop() {
+        SortedStack<Integer> sortedStack = new SortedStack<>();
+        sortedStack.push(1);
+        Assert.assertEquals(1, (int) sortedStack.pop());
+    }
+
+    @Test
+    public void sortedStack_sortedPop() {
+        SortedStack<Integer> sortedStack = new SortedStack<>();
+        sortedStack.push(20);
+        sortedStack.push(7);
+        sortedStack.push(33);
+        sortedStack.push(1);
+
+        Integer lastValue = Integer.MAX_VALUE;
+        while (sortedStack.peek() != null) {
+            Assert.assertTrue(sortedStack.peek() < lastValue);
+            lastValue = sortedStack.pop();
+        }
+    }
+
+    @Test
+    public void sortedStack_isEmpty_true() {
+        SortedStack<Integer> sortedStack = new SortedStack<>();
+        Assert.assertTrue(sortedStack.isEmpty());
+    }
+
+    @Test
+    public void sortedStack_isEmpty_false() {
+        SortedStack<Integer> sortedStack = new SortedStack<>();
+        sortedStack.push(1);
+        Assert.assertFalse(sortedStack.isEmpty());
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
