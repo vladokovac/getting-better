@@ -3,6 +3,9 @@ package hr.mogh.tests;
 import hr.mogh.crackingthecodinginterview.ch1.*;
 import hr.mogh.crackingthecodinginterview.ch2.*;
 import hr.mogh.crackingthecodinginterview.ch3.*;
+import hr.mogh.crackingthecodinginterview.ch3.AnimalShelter.Animal;
+import hr.mogh.crackingthecodinginterview.ch3.AnimalShelter.AnimalShelter;
+import hr.mogh.crackingthecodinginterview.ch3.AnimalShelter.AnimalType;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
 import org.junit.Assert;
@@ -622,6 +625,44 @@ public class CrackingTests {
         SortedStack<Integer> sortedStack = new SortedStack<>();
         sortedStack.push(1);
         Assert.assertFalse(sortedStack.isEmpty());
+    }
+
+    @Test
+    public void animalEnqueueDequeueAny() {
+        AnimalShelter animalShelter = new AnimalShelter();
+        Animal cat1 = new Animal(AnimalType.CAT);
+        Animal cat2 = new Animal(AnimalType.CAT);
+        Animal cat3 = new Animal(AnimalType.CAT);
+
+        Animal dog1 = new Animal(AnimalType.DOG);
+
+        animalShelter.enqueue(cat1);
+        animalShelter.enqueue(cat2);
+        animalShelter.enqueue(dog1);
+        animalShelter.enqueue(cat3);
+
+        Assert.assertEquals(cat1, animalShelter.dequeueAny());
+        Assert.assertEquals(cat2, animalShelter.dequeueAny());
+        Assert.assertEquals(dog1, animalShelter.dequeueAny());
+        Assert.assertEquals(cat3, animalShelter.dequeueAny());
+        Assert.assertNull(animalShelter.dequeueAny());
+    }
+
+    @Test
+    public void animalEnqueueDequeueDog() {
+        AnimalShelter animalShelter = new AnimalShelter();
+        Animal cat1 = new Animal(AnimalType.CAT);
+        Animal cat2 = new Animal(AnimalType.CAT);
+
+        Animal dog1 = new Animal(AnimalType.DOG);
+        Animal dog2 = new Animal(AnimalType.DOG);
+
+        animalShelter.enqueue(cat1);
+        animalShelter.enqueue(dog1);
+        animalShelter.enqueue(dog2);
+        animalShelter.enqueue(cat2);
+
+        Assert.assertEquals(dog1, animalShelter.dequeueDog());
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
