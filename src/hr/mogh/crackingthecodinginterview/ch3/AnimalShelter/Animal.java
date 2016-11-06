@@ -9,12 +9,18 @@ import java.util.List;
 public class Animal {
 
     private AnimalType type;
+    private long timeArrived;
 
-    public Animal (AnimalType type) {
+    public Animal (AnimalType type, long timeArrived) {
         this.type = type;
+        this.timeArrived = timeArrived;
     }
 
     public AnimalType getType() {
         return type;
+    }
+
+    public long getTimeArrived() {
+        return timeArrived;
     }
 }

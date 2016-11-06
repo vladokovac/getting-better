@@ -1,11 +1,29 @@
 package hr.mogh.tests;
 
-import hr.mogh.crackingthecodinginterview.ch1.*;
-import hr.mogh.crackingthecodinginterview.ch2.*;
-import hr.mogh.crackingthecodinginterview.ch3.*;
+import hr.mogh.crackingthecodinginterview.ch1.ImageRotator;
+import hr.mogh.crackingthecodinginterview.ch1.MatrixZeroing;
+import hr.mogh.crackingthecodinginterview.ch1.RotatedStringDetector;
+import hr.mogh.crackingthecodinginterview.ch1.SpaceReplacer;
+import hr.mogh.crackingthecodinginterview.ch1.StringCompressor;
+import hr.mogh.crackingthecodinginterview.ch1.StringPermutationChecker;
+import hr.mogh.crackingthecodinginterview.ch1.UniqueCharacterStringSolver;
+import hr.mogh.crackingthecodinginterview.ch2.CircularLinkedListDetector;
+import hr.mogh.crackingthecodinginterview.ch2.LinkedListPartitioner;
+import hr.mogh.crackingthecodinginterview.ch2.ListAdditionImplementations;
+import hr.mogh.crackingthecodinginterview.ch2.ListNodeFinder;
+import hr.mogh.crackingthecodinginterview.ch2.ListNodeRemover;
+import hr.mogh.crackingthecodinginterview.ch2.ListPruner;
+import hr.mogh.crackingthecodinginterview.ch2.PalindromeListDetector;
 import hr.mogh.crackingthecodinginterview.ch3.AnimalShelter.Animal;
 import hr.mogh.crackingthecodinginterview.ch3.AnimalShelter.AnimalShelter;
 import hr.mogh.crackingthecodinginterview.ch3.AnimalShelter.AnimalType;
+import hr.mogh.crackingthecodinginterview.ch3.FasterMinStack;
+import hr.mogh.crackingthecodinginterview.ch3.HanoiTowerSolver;
+import hr.mogh.crackingthecodinginterview.ch3.MinStack;
+import hr.mogh.crackingthecodinginterview.ch3.MyQueue;
+import hr.mogh.crackingthecodinginterview.ch3.SetOfStacks;
+import hr.mogh.crackingthecodinginterview.ch3.SortedStack;
+import hr.mogh.crackingthecodinginterview.ch3.TriStack;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
 import org.junit.Assert;
@@ -630,39 +648,42 @@ public class CrackingTests {
     @Test
     public void animalEnqueueDequeueAny() {
         AnimalShelter animalShelter = new AnimalShelter();
-        Animal cat1 = new Animal(AnimalType.CAT);
-        Animal cat2 = new Animal(AnimalType.CAT);
-        Animal cat3 = new Animal(AnimalType.CAT);
 
-        Animal dog1 = new Animal(AnimalType.DOG);
+        animalShelter.enqueue(AnimalType.CAT);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        animalShelter.enqueue(AnimalType.CAT);
+        animalShelter.enqueue(AnimalType.DOG);
+        animalShelter.enqueue(AnimalType.CAT);
 
-        animalShelter.enqueue(cat1);
-        animalShelter.enqueue(cat2);
-        animalShelter.enqueue(dog1);
-        animalShelter.enqueue(cat3);
+        long lastTimeArrived = 0;
+        for (int i = 0; i < 4; i++) {
+            Animal animal = animalShelter.dequeueAny();
+            Assert.assertTrue(animal.getTimeArrived() >= lastTimeArrived);
+            lastTimeArrived = animal.getTimeArrived();
+        }
+        Assert.assertNull(animalShelter.dequeueAny());
+    }
 
-        Assert.assertEquals(cat1, animalShelter.dequeueAny());
-        Assert.assertEquals(cat2, animalShelter.dequeueAny());
-        Assert.assertEquals(dog1, animalShelter.dequeueAny());
-        Assert.assertEquals(cat3, animalShelter.dequeueAny());
+    @Test
+    public void animalShelterDequeueEmpty() {
+        AnimalShelter animalShelter = new AnimalShelter();
         Assert.assertNull(animalShelter.dequeueAny());
     }
 
     @Test
     public void animalEnqueueDequeueDog() {
         AnimalShelter animalShelter = new AnimalShelter();
-        Animal cat1 = new Animal(AnimalType.CAT);
-        Animal cat2 = new Animal(AnimalType.CAT);
 
-        Animal dog1 = new Animal(AnimalType.DOG);
-        Animal dog2 = new Animal(AnimalType.DOG);
+        animalShelter.enqueue(AnimalType.CAT);
+        animalShelter.enqueue(AnimalType.DOG);
+        animalShelter.enqueue(AnimalType.DOG);
+        animalShelter.enqueue(AnimalType.CAT);
 
-        animalShelter.enqueue(cat1);
-        animalShelter.enqueue(dog1);
-        animalShelter.enqueue(dog2);
-        animalShelter.enqueue(cat2);
-
-        Assert.assertEquals(dog1, animalShelter.dequeueDog());
+        Assert.assertEquals(AnimalType.DOG, animalShelter.dequeueDog().getType());
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
