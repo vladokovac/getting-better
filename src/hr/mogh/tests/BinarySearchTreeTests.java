@@ -10,7 +10,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.lang.Integer;
 
 /**
  * Contains tests written to ensure BST algorithms work as intended.
@@ -69,18 +68,16 @@ public class BinarySearchTreeTests {
         BinarySearchTreeSolver.insert(this.root, 56);
         BinaryTreeNode node = BinarySearchTreeSolver.find(this.root, 56);
         Assert.assertNotNull(node);
-        if (node.getParent().getLeftChild() == node) {
-            Assert.assertTrue(node.getParent().getValue() >= 56);
-        } else {
-            Assert.assertTrue(node.getParent().getValue() < 56);
-        }
+        Assert.assertTrue(validateBst(this.root));
     }
 
     @Test
     public void deleteNodeTest() {
-        BinarySearchTreeSolver.delete(this.root, 42);
-        BinaryTreeNode node = BinarySearchTreeSolver.find(this.root, 42);
+        int deletedValue = 10;
+        BinarySearchTreeSolver.delete(this.root, deletedValue);
+        BinaryTreeNode node = BinarySearchTreeSolver.find(this.root, deletedValue);
         Assert.assertNull(node);
+        Assert.assertTrue(validateBst(this.root));
     }
 
     @Test
@@ -117,5 +114,32 @@ public class BinarySearchTreeTests {
         Assert.assertEquals(4, postOrderList.get(2).intValue());
         Assert.assertEquals(1, postOrderList.get(3).intValue());
         Assert.assertEquals(11, postOrderList.get(4).intValue());
+    }
+
+    private boolean validateBst(BinaryTreeNode node) {
+        if (node == null) {
+            return true;
+        }
+
+        boolean hasLeftChild = node.getLeftChild() != null;
+        boolean hasRightChild = node.getRightChild() != null;
+
+        boolean isValidLeft = true;
+        boolean isValidRight = true;
+
+        boolean isLeftChildValid = true;
+        boolean isRightChildValid = true;
+
+        if (hasLeftChild) {
+            isValidLeft = node.getValue() >= node.getLeftChild().getValue();
+            isLeftChildValid = validateBst(node.getLeftChild());
+        }
+
+        if (hasRightChild) {
+            isValidRight = node.getValue() < node.getRightChild().getValue();
+            isRightChildValid = validateBst(node.getRightChild());
+        }
+
+        return isValidLeft && isValidRight && isLeftChildValid && isRightChildValid;
     }
 }

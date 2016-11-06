@@ -56,32 +56,42 @@ public class BinarySearchTreeSolver {
         BinaryTreeNode deletedNode = find(node, data);
         if (deletedNode != null) {
             BinaryTreeNode parent = deletedNode.getParent();
-            if (parent != null) {
-                if (deletedNode.getLeftChild() == null && deletedNode.getRightChild() == null) {
+
+            // No children
+            if (deletedNode.getLeftChild() == null && deletedNode.getRightChild() == null) {
+                if (parent != null) {
                     if (parent.getRightChild() == deletedNode) {
                         parent.setRightChild(null);
                     } else {
                         parent.setLeftChild(null);
                     }
                 }
+            }
 
-                if (deletedNode.getLeftChild() == null && deletedNode.getRightChild() != null) {
+            // Single child
+            if (deletedNode.getLeftChild() == null && deletedNode.getRightChild() != null) {
+                if (parent != null) {
                     if (parent.getRightChild() == deletedNode) {
                         parent.setRightChild(deletedNode.getRightChild());
                     } else {
                         parent.setLeftChild(deletedNode.getRightChild());
                     }
-                } else if (deletedNode.getLeftChild() != null && deletedNode.getRightChild() == null) {
+                }
+            } else if (deletedNode.getLeftChild() != null && deletedNode.getRightChild() == null) {
+                if (parent != null) {
                     if (parent.getRightChild() == deletedNode) {
                         parent.setRightChild(deletedNode.getLeftChild());
                     } else {
                         parent.setLeftChild(deletedNode.getLeftChild());
                     }
-                } else if (deletedNode.getLeftChild() != null && deletedNode.getRightChild() != null) {
-                    BinaryTreeNode successorNode = findMin(deletedNode.getLeftChild());
-                    parent.setValue(successorNode.getValue());
-                    successorNode.getParent().setLeftChild(null);
                 }
+            }
+
+            // Both children
+            if (deletedNode.getLeftChild() != null && deletedNode.getRightChild() != null) {
+                BinaryTreeNode successorNode = findMin(deletedNode.getRightChild());
+                deletedNode.setValue(successorNode.getValue());
+                successorNode.getParent().setLeftChild(null);
             }
         }
     }
