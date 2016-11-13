@@ -24,8 +24,10 @@ import hr.mogh.crackingthecodinginterview.ch3.MyQueue;
 import hr.mogh.crackingthecodinginterview.ch3.SetOfStacks;
 import hr.mogh.crackingthecodinginterview.ch3.SortedStack;
 import hr.mogh.crackingthecodinginterview.ch3.TriStack;
+import hr.mogh.crackingthecodinginterview.ch4.BinaryTreeBalanceDetector;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
+import hr.mogh.datastructures.trees.BinaryTreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -684,6 +686,38 @@ public class CrackingTests {
         animalShelter.enqueue(AnimalType.CAT);
 
         Assert.assertEquals(AnimalType.DOG, animalShelter.dequeueDog().getType());
+    }
+
+    @Test
+    public void treeBalanceTest_isBalanced() {
+        BinaryTreeNode root = new BinaryTreeNode(1, null);
+        BinaryTreeNode left = new BinaryTreeNode(2, root);
+        BinaryTreeNode right = new BinaryTreeNode(3, root);
+        root.setLeftChild(left);
+        root.setRightChild(right);
+
+        left.setLeftChild(new BinaryTreeNode(4, left));
+        left.setRightChild(new BinaryTreeNode(5, left));
+        right.setLeftChild(new BinaryTreeNode(6, right));
+
+        Assert.assertTrue(BinaryTreeBalanceDetector.isTreeBalanced(root));
+    }
+
+    @Test
+    public void treeBalanceTest_isNotBalanced() {
+        BinaryTreeNode root = new BinaryTreeNode(1, null);
+        BinaryTreeNode left = new BinaryTreeNode(2, root);
+        BinaryTreeNode leftLeft = new BinaryTreeNode(3, root);
+        root.setLeftChild(left);
+
+        left.setLeftChild(leftLeft);
+
+        Assert.assertFalse(BinaryTreeBalanceDetector.isTreeBalanced(root));
+    }
+
+    @Test
+    public void treeBalanceTest_nullTree() {
+        Assert.assertTrue(BinaryTreeBalanceDetector.isTreeBalanced(null));
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
