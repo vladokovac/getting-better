@@ -16,7 +16,7 @@ public class BinaryTreeBalanceDetector {
      * Returns whether the tree is balanced or not. Balanced means that the height of the two subtrees does not
      * differ by more than 1.<br/>
      * Space complexity: <code>O(n)</code>.<br/>
-     * Time complexity: <code>O(n log n)</code>.
+     * Time complexity: <code>O(n^2)</code>.
      *
      * @param node The tree root.
      * @return True if tree is "balanced".
