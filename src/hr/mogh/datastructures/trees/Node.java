@@ -17,6 +17,11 @@ public class Node {
         parent = null;
     }
 
+    public Node(Object payload) {
+        this();
+        this.payload = payload;
+    }
+
     public Node(Object payload, Node parent, List<Node> children) {
         this.payload = payload;
         this.parent = parent;
@@ -48,6 +53,10 @@ public class Node {
             child.setParent(this);
         }
         this.children = children;
+    }
+
+    public void addChild(Node child) {
+        this.children.add(child);
     }
 
     @Override

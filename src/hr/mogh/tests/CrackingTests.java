@@ -25,9 +25,11 @@ import hr.mogh.crackingthecodinginterview.ch3.SetOfStacks;
 import hr.mogh.crackingthecodinginterview.ch3.SortedStack;
 import hr.mogh.crackingthecodinginterview.ch3.TriStack;
 import hr.mogh.crackingthecodinginterview.ch4.BinaryTreeBalanceDetector;
+import hr.mogh.crackingthecodinginterview.ch4.RouteFinder;
 import hr.mogh.datastructures.linkedlist.DoublyLinkedList;
 import hr.mogh.datastructures.linkedlist.ListNode;
 import hr.mogh.datastructures.trees.BinaryTreeNode;
+import hr.mogh.datastructures.trees.Node;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -718,6 +720,50 @@ public class CrackingTests {
     @Test
     public void treeBalanceTest_nullTree() {
         Assert.assertTrue(BinaryTreeBalanceDetector.isTreeBalanced(null));
+    }
+
+    @Test
+    public void directedGraphRouteSearch_routeExists() {
+        Node node0 = new Node(1);
+        Node node1 = new Node(2);
+        Node node2 = new Node(3);
+        Node node3 = new Node(4);
+        Node node4 = new Node(5);
+        Node node5 = new Node(6);
+
+        node3.addChild(node4);
+        node3.addChild(node5);
+        node2.addChild(node3);
+        node1.addChild(node2);
+        node1.addChild(node4);
+        node0.addChild(node1);
+
+        List<Node> expectedRoute = Arrays.asList(node1, node2, node3, node5);
+        List<Node> route = RouteFinder.findRoute(node1, node5);
+        Assert.assertNotNull(route);
+        Assert.assertEquals(expectedRoute.size(), route.size());
+        for (int i = 0; i < expectedRoute.size(); i++) {
+            Assert.assertEquals(expectedRoute.get(i), route.get(i));
+        }
+    }
+
+    @Test
+    public void directedGraphRouteSearch_routeDoesntExist() {
+        Node node0 = new Node(1);
+        Node node1 = new Node(2);
+        Node node2 = new Node(3);
+        Node node3 = new Node(4);
+        Node node4 = new Node(5);
+        Node node5 = new Node(6);
+
+        node3.addChild(node4);
+        node3.addChild(node5);
+        node2.addChild(node3);
+        node1.addChild(node2);
+        node1.addChild(node4);
+        node0.addChild(node1);
+
+        Assert.assertNull(RouteFinder.findRoute(node4, node5));
     }
 
     private void assertListPartitionedCorrectly(DoublyLinkedList partitionedList, int pivotValue) {
