@@ -1,5 +1,7 @@
 # A list of Big Oh problems and answers
 
+## Questions
+
 1.
 
     for(int i = 0; i < n; i++)
@@ -46,3 +48,27 @@
 
     for(int i = 1; i < n; i = i * 2)
         sum++;
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Answers
+
+1. `O(n)`
+2. `O(n)`
+3. `O(n^2)`
+4. `O(n)`
+5. `O(n^3)`
+6. `O(n^2)`
+7. `O(n^5)`
+8. `O(log(n))`
