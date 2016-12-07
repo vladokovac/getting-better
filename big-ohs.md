@@ -41,10 +41,8 @@
         for( int j = 0; j < n * n; j++)
             for(int k = 0; k < j; k++)
                 sum++;
-                
+
 8.
 
     for(int i = 1; i < n; i = i * 2)
-        sum++;
-        
-9.
+        sum++;
