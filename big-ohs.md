@@ -49,10 +49,39 @@
     for(int i = 1; i < n; i = i * 2)
         sum++;
         
+9.
 
+    for i = 1 to n do
+        j = i
+        while j < n do
+            j = j + 3
+        
+10.
 
+    for i = 1 to n do
+        for j = 2*i to n do
+            s = s+1
 
+11.
 
+    for i = 1 to n do
+        j = i
+        while j < n do
+            j = 2*j
+
+12.
+
+    for i = 1 to n do
+        j = n
+        while i*i < j do
+            j = j - 1
+            
+13.
+
+    for i = 1 to n do
+        j = 2
+        while j < i do
+            j = j*j
 
 
 
@@ -72,3 +101,9 @@
 6. `O(n^2)`
 7. `O(n^5)`
 8. `O(log(n))`
+9. `O(n^2)`
+10. `O(n^2)`
+11. `O(nlog(n))`
+12. `O(n sqrt(n))`
+13. `O(nlg(n))`
+
